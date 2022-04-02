@@ -2,7 +2,7 @@
     controllerName="project3bestellungfreigeben.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
 
-    xmlns:f='sap.ui.form'
+    xmlns:form="sap.ui.layout.form"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
@@ -29,6 +29,60 @@
                         </statuses>
                         <markers/>
                     </ObjectHeader>
+
+                <form:Form width="100%" editable="false" visible="true">
+                <form:title/>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Bestellnummer" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="45000000004" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Lieferdatum" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="04.04.2022" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Werk" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="Frankfurt" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Zahlungsbedingungen" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="14 Tage 3%, 30/2%, 45 net" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Incoterms" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <Text text="FOB - Frankfurt" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:fields>
+                            </form:FormElement>
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
 
                     <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
                 <items>
@@ -112,7 +166,8 @@
                     <Text text="Tab Bar Content goes here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                 </content>
             </IconTabBar>
-                
+            
+              
                 
             </content>
 
@@ -169,13 +224,54 @@
 				id="master2"
 				title="Bestellungen"
 				backgroundDesign="List">
-				<List itemPress=".onListItemPress">
-					<items>
-						<StandardListItem title="Bestellung 1" type="Active" custom:to="detail" />
-						<StandardListItem title="Bestellung 2" type="Active" custom:to="detailDetail" />
-						<StandardListItem title="Bestellung 3" type="Active" custom:to="detail2" />
-					</items>
-				</List>
+				<List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
+                <infoToolbar/>
+                <headerToolbar>
+                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                        <content>
+                            <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%"/>
+                        </content>
+                    </Toolbar>
+                </headerToolbar>
+                <items>
+                    <ObjectListItem intro="" title="Bosch" number="1.000" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute text="450000004" active="false" visible="true"/>
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus title="" text="Heute" state="None" visible="true"/>
+                        </firstStatus>
+                        <secondStatus/>
+                    </ObjectListItem>
+                    <ObjectListItem intro="" title="Cube Ryde" number="450,60" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute text="450000003" active="false" visible="true"/>
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus text="Heute" state="None" visible="true"/>
+                        </firstStatus>
+                        <secondStatus/>
+                    </ObjectListItem>
+                    <ObjectListItem intro="" title="fahrrad.de" number="134.430" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute text="450000002" active="false" visible="true"/>
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus text="30.03.2022" state="None" visible="true"/>
+                        </firstStatus>
+                        <secondStatus/>
+                    </ObjectListItem>
+                    <ObjectListItem intro="" title="Rahmen Müller" number="4.600" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute text="450000001" active="false" visible="true"/>
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus text="15.03.2022" state="None" visible="true"/>
+                        </firstStatus>
+                        <secondStatus/>
+                    </ObjectListItem>
+                </items>
+            </List>
 			</Page>
 		</masterPages>
 	</SplitApp>

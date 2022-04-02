@@ -1,18 +1,182 @@
 <mvc:View
     controllerName="project3bestellungfreigeben.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
+
+    xmlns:f='sap.ui.form'
     displayBlock="true"
     xmlns="sap.m"
+    xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 >
-    <Shell id="shell">
-        <App id="app">
-            <pages>
-                <Page id="page" title="{i18n>title}">
-                    <content> 
-                        <Text text='Hello Test TEST'></Text>
-                    </content>
-                </Page>
-            </pages>
-        </App>
-    </Shell>
+    <SplitApp
+		id="SplitAppDemo"
+		initialDetail="detail"
+		initialMaster="master">
+		<detailPages>
+        
+			<Page
+				id="detail"
+				title="Bestelldetails"
+				backgroundDesign= "Solid"
+                showHeader="true" 
+                showFooter="true" 
+                showNavButton="false">
+
+                <content>
+                    <ObjectHeader intro="" title="Bosch" icon="sap-icon://cart" number="1,000" numberUnit="EUR" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+                        <attributes/>
+                        <statuses>
+                        <ObjectStatus text="Heute" state="None" visible="true"/>
+                        </statuses>
+                        <markers/>
+                    </ObjectHeader>
+
+                    <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+                <items>
+                    <IconTabFilter icon="sap-icon://hint" iconColor="Positive" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                        <content>
+                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                                <infoToolbar/>
+                                <headerToolbar/>
+                                <columns>
+                                    <Column width="10%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Position" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Produktname" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="10%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Anzahl" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="10%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Stückpreis" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="20%" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Zwischensumme" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <Text text="10" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectIdentifier title="Elektromotor E3456" text="148105123451" titleActive="false" visible="true"/>
+                                            <ObjectNumber number="4" unit="Stück" emphasized="true" state="None"/>
+                                            <ObjectNumber number="150,00" unit="EUR" emphasized="true" state="None"/>
+                                            <ObjectNumber number="600,00" unit="EUR" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <Text text="20" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectIdentifier title="Kettenblatt K0835" text="148235925923" titleActive="false" visible="true"/>
+                                            <ObjectNumber number="9" unit="Stück" emphasized="true" state="None"/>
+                                            <ObjectNumber number="40" unit="EUR" emphasized="true" state="None"/>
+                                            <ObjectNumber number="360,00" unit="EUR" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <Text text="30" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectIdentifier title="Dichtungsring für E3456" text="148266784584" titleActive="false" visible="true"/>
+                                            <ObjectNumber number="100" unit="Stück" emphasized="true" state="None"/>
+                                            <ObjectNumber number="0,40" unit="EUR" emphasized="true" state="None"/>
+                                            <ObjectNumber number="40,00" unit="EUR" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                    <IconTabFilter icon="sap-icon://notes" iconColor="Neutral" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                        <content>
+                            <Text text="Notes go here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                        </content>
+                    </IconTabFilter>
+                </items>
+                <content>
+                    <Text text="Tab Bar Content goes here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                </content>
+            </IconTabBar>
+                
+                
+            </content>
+
+            <footer>
+            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                    <Button text="Genehmigen" type="Accept" icon="sap-icon://thumb-up" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                    <Button text="Ablehnen" type="Reject" icon="sap-icon://thumb-down" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+				
+				
+			</Page>
+			<Page
+				id="detailDetail"
+				title="Page 2"
+				backgroundDesign= "Solid"
+				showNavButton="true"
+				navButtonPress=".onPressDetailBack">
+				<VBox class="sapUiSmallMargin">
+					<Label text="This is Detail Page2" />
+					<Text text="Here you could change the Split Application mode. After the mode change, resize the browser window to see the difference in the master form behaviour." />
+					<RadioButtonGroup columns="1" width="500px" class="sapUiMediumMarginBottom" select=".onPressModeBtn">
+						<RadioButton id="RB1-1" text="show/hide" selected="true" custom:splitAppMode="ShowHideMode" />
+						<RadioButton id="RB1-2" text="stretch/compress" custom:splitAppMode="StretchCompressMode" />
+						<RadioButton id="RB1-3" text="hide" custom:splitAppMode="HideMode" />
+						<RadioButton id="RB1-4" text="popover" custom:splitAppMode="PopoverMode" />
+					</RadioButtonGroup>
+				</VBox>
+			</Page>
+			<Page
+				id="detail2"
+				title="Detail 3 Page"
+				backgroundDesign= "Solid"
+				showNavButton="true"
+				navButtonPress=".onPressDetailBack">
+				<Label text="This is Detail Page3" />
+				<Input/>
+				<Label text="Label 2" />
+				<Input/>
+				<Label text="Label 3" />
+				<Input/>
+				<Label text="Label 4" />
+				<Input/>
+				<Label text="Label 5" />
+				<Input/>
+			</Page>
+		</detailPages>
+		<masterPages>
+			
+			<Page
+				id="master2"
+				title="Bestellungen"
+				backgroundDesign="List">
+				<List itemPress=".onListItemPress">
+					<items>
+						<StandardListItem title="Bestellung 1" type="Active" custom:to="detail" />
+						<StandardListItem title="Bestellung 2" type="Active" custom:to="detailDetail" />
+						<StandardListItem title="Bestellung 3" type="Active" custom:to="detail2" />
+					</items>
+				</List>
+			</Page>
+		</masterPages>
+	</SplitApp>
 </mvc:View>

@@ -2,9 +2,9 @@ FHWS FWPM Fiori SS22:
 Aufgabe: Bestellungen freigeben.
 
 Team:
-Endres, Moritz
-Fuchs, Julia
-Haß, Jan Mika
+Endres, Moritz;
+Fuchs, Julia;
+Haß, Jan Mika;
 Stark, Annalena
 
 

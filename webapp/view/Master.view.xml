@@ -1,0 +1,18 @@
+<mvc:View
+    controllerName="project3bestellungfreigeben.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <App>
+        <pages>
+            <Page title="Master">
+                <content>
+                    <Label text="Master Test"/>
+                </content>
+            </Page>
+        </pages>
+    </App>
+
+
+
+</mvc:View>

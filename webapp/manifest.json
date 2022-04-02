@@ -95,28 +95,39 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": "RouteView1",
-          "target": [
-            "TargetView1"
-          ]
+          
+
+          "name": "Master",
+          "view": "Master",
+          "pattern": "",
+          "targetAggregation": "masterPages",
+          "targetControl": "splitapp",
+
+          "subroutes": 
+          [{ 
+              "name": "Detail",
+              "view": "Detail",
+              "pattern": "",
+              "targetAggregation": "detailPages"
+          }]
+
         }
       ],
       "targets": {
-        "TargetView1": {
+        "TargetApp": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
+          "viewId": "app",
+          "viewName": "app"
         }
       }
     },
     "rootView": {
-      "viewName": "project3bestellungfreigeben.view.View1",
+      "viewName": "project3bestellungfreigeben.view.app",
       "type": "XML",
       "async": true,
-      "id": "View1"
+      "id": "app"
     }
   }
 }

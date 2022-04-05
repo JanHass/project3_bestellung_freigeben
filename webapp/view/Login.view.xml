@@ -21,7 +21,7 @@
                          <items>
                          <Label text="Geben Sie Ihre Anmeldedaten ein:"/>
                          <Input placeholder="Benutzer" id="inp_usernameId"/>
-                         <Input placeholder="Passwort" type="password" id="inp_passwordId"/>
+                         <Input placeholder="Passwort" type="Password" id="inp_passwordId"/>
                          <Button width="11.5rem" text="Anmelden" type="Emphasized" press="onLoginUser"/>
                          </items>
                          </VBox>

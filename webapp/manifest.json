@@ -12,12 +12,12 @@
     "resources": "resources.json",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/",
+        "uri": "/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
+          "odataVersion": "2.0"
         }
       }
     }

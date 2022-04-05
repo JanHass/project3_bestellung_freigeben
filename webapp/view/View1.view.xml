@@ -20,6 +20,7 @@
                 showFooter="true" 
                 showNavButton="false">
 
+
                 <content>
                     <ObjectHeader intro="" title="Bosch" icon="sap-icon://cart" number="1,000" numberUnit="EUR" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
                         <attributes/>
@@ -198,64 +199,31 @@
 			<Page
 				id="master2"
 				title="Bestellungen"
-				backgroundDesign="List">
-
-				<List id="search" mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" 
-                backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" 
-                growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
-                
-                <infoToolbar/>
-                 <headerToolbar>
-                    <Toolbar enabled="true" visible="true" width="" design="Solid">
-                        <content>
-                            <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%" 
-                            search="onFilter" selectOnFocus="false"/>
-                        </content>
-                    </Toolbar>
-                </headerToolbar>
-              
-               
-                
-               
-                <items>
-                    <ObjectListItem intro="" title="Bosch" number="1.000" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000004" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus title="" text="Heute" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="Cube Ryde" number="450,60" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000003" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="Heute" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="fahrrad.de" number="134.430" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000002" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="30.03.2022" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="Rahmen Müller" number="4.600" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000001" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="15.03.2022" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                </items>
-            </List>
+				backgroundDesign="List">	
+	    <List
+		items="{/A_PurchaseOrder}">
+		<ObjectListItem
+			title="{PurchaseOrder}"
+			type="Active"
+			press="onListItemPress"
+			number="{
+				parts:[{path:'Price'},{path:'CurrencyCode'}],
+				type: 'sap.ui.model.type.Currency',
+				formatOptions: {showMeasure: false}
+			}"
+			numberUnit="{CurrencyCode}">
+			<firstStatus>
+				<ObjectStatus
+					text="{Supplier}"
+					state="{
+						path: 'Status',
+						formatter: 'sap.m.sample.ObjectListItem.Formatter.status'
+					}" />
+			</firstStatus>
+			<ObjectAttribute text="{WeightMeasure} {WeightUnit}" />
+			<ObjectAttribute text="{PurchaseOrderDate}" />
+		</ObjectListItem>
+	</List>
 			</Page>
 		</masterPages>
 	</SplitApp>

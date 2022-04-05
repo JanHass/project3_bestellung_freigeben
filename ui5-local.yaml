@@ -31,7 +31,16 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: http://localhost
+            url: https://s4h.ososoft.de:44300
+    - name: sap-fe-mockserver
+      beforeMiddleware: fiori-tools-proxy
+      configuration:
+        service:
+          urlBasePath: /sap/opu/odata/sap/ZOSO_PURCHASEORDER
+          name: ''
+          metadataXmlPath: ./webapp/localService/metadata.xml
+          mockdataRootPath: ./webapp/localService/data
+          generateMockData: true
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:

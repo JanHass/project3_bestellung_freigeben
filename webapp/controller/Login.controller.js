@@ -16,14 +16,13 @@ sap.ui.define([
             var pass ="1234";
 
             if(Benutzer.getValue()===""){
-                MessageBox.error("Bitte den Benutzer angeben");
+                MessageBox.error("Bitte den Benutzernamen angeben");
                 return;
             } else if(Passwort.getValue()===""){
                 MessageBox.error("Bitte das Passwort angeben");
                 return;
             }else{
                 if(Benutzer.getValue()===user && Passwort.getValue()===pass){
-                    //MessageBox.success("Anmeldung war erfolgreich");
                     var oRouter=sap.ui.core.UIComponent.getRouterFor(this)
                     oRouter.navTo("View1")
             }else{

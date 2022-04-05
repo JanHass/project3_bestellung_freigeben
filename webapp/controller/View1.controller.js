@@ -2,8 +2,11 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/Device",
-	"sap/base/Log"
-], function (MessageToast, Controller, Device, Log) {
+	"sap/base/Log",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/m/MessageBox"
+], function (MessageToast, Controller, Device, Log, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("project3bestellungfreigeben.controller.View1", {
@@ -62,7 +65,41 @@ sap.ui.define([
 				Log.info("SplitApp object can't be found");
 			}
 			return result;
+		},
+		onLoginUser: function(){
+			var Benutzer = this.getView().byId("inp_usernameId");
+			var Passwort = this.getView().byId("inp_passwordId");
+
+			var user ="Test";
+			var pass ="1234";
+
+			if(Benutzer.getValue()===""){
+				MessageBox.error("Bitte den Benutzer angeben");
+				return;
+			} else if(Passwort.getValue()===""){
+				MessageBox.error("Bitte das Passwort angeben");
+				return;
+			}else{
+				if(Benutzer.getValue()===user && Passwort.getValue()===pass){
+					MessageBox.success("Anmeldung war erfolgreich");
+			}else{
+				MessageBox.error("Falscher Benutzername oder Passwort");
+				return;
+			}
 		}
+	},
+	onFilterProducts: function(oEvent){
+		var aFilter = [], sQuery = oEvent.getParamenter("query"),
+		oList = this.getVies().byId("productList"),
+		oBinding = oList.getBinding("items");
+
+		if(sQuery){
+			aFilter.puwsh(new Filter("ProductID", FilterOperator.Contains, sQuery));
+		}
+		oBinding.filter(aFilter);
+
+		
+	}
 
 	});
 });

@@ -1,12 +1,11 @@
 <mvc:View
     controllerName="project3bestellungfreigeben.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
-
+    xmlns:tnt="sap.tnt"
     xmlns:form="sap.ui.layout.form"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
->
     <SplitApp
 		id="SplitAppDemo"
 		initialDetail="detail"
@@ -166,11 +165,7 @@
                     <Text text="Tab Bar Content goes here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                 </content>
             </IconTabBar>
-            
-              
-                
             </content>
-
             <footer>
             <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
                 <content>
@@ -179,9 +174,7 @@
                     <Button text="Ablehnen" type="Reject" icon="sap-icon://thumb-down" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                 </content>
             </OverflowToolbar>
-        </footer>
-				
-				
+        </footer>				
 			</Page>
 			<Page
 				id="detailDetail"
@@ -200,39 +193,30 @@
 					</RadioButtonGroup>
 				</VBox>
 			</Page>
-			<Page
-				id="detail2"
-				title="Detail 3 Page"
-				backgroundDesign= "Solid"
-				showNavButton="true"
-				navButtonPress=".onPressDetailBack">
-				<Label text="This is Detail Page3" />
-				<Input/>
-				<Label text="Label 2" />
-				<Input/>
-				<Label text="Label 3" />
-				<Input/>
-				<Label text="Label 4" />
-				<Input/>
-				<Label text="Label 5" />
-				<Input/>
-			</Page>
 		</detailPages>
 		<masterPages>
-			
 			<Page
 				id="master2"
 				title="Bestellungen"
 				backgroundDesign="List">
-				<List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
+
+				<List id="search" mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" 
+                backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" 
+                growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
+                
                 <infoToolbar/>
-                <headerToolbar>
+                 <headerToolbar>
                     <Toolbar enabled="true" visible="true" width="" design="Solid">
                         <content>
-                            <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%"/>
+                            <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%" 
+                            search="onFilter" selectOnFocus="false"/>
                         </content>
                     </Toolbar>
                 </headerToolbar>
+              
+               
+                
+               
                 <items>
                     <ObjectListItem intro="" title="Bosch" number="1.000" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
                         <attributes>

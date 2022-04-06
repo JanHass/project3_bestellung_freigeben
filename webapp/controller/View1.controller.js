@@ -5,8 +5,10 @@ sap.ui.define([
 	"sap/base/Log",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/m/MessageBox"
-], function (MessageToast, Controller, Device, Log, MessageBox, Filter, FilterOperator) {
+	"sap/m/MessageBox",
+	"sap/ui/thirdparty/jquery",
+	"sap/ui/model/json/JSONModel",
+], function (MessageToast, Controller, Device, Log, MessageBox, Filter, FilterOperator,jQuery,JSONModel) {
 	"use strict";
 
 	return Controller.extend("project3bestellungfreigeben.controller.View1", {

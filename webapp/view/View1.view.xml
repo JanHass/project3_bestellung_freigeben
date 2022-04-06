@@ -19,9 +19,13 @@
                 showHeader="true" 
                 showFooter="true" 
                 showNavButton="false">
+            
+	
+                
 
-
+                
                 <content>
+                
                     <ObjectHeader intro="" title="Bosch" icon="sap-icon://cart" number="1,000" numberUnit="EUR" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
                         <attributes/>
                         <statuses>
@@ -29,6 +33,7 @@
                         </statuses>
                         <markers/>
                     </ObjectHeader>
+                
 
                 <form:Form width="100%" editable="false" visible="true">
                 <form:title/>
@@ -86,7 +91,7 @@
 
                     <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
                 <items>
-                    <IconTabFilter icon="sap-icon://hint" iconColor="Positive" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                    <IconTabFilter icon="sap-icon://hint"   text="Informationen" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
                         <content>
                             <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
                                 <infoToolbar/>
@@ -155,12 +160,11 @@
                             </Table>
                         </content>
                     </IconTabFilter>
-                    <IconTabSeparator icon="" iconDensityAware="false"/>
-                    <IconTabFilter icon="sap-icon://notes" iconColor="Neutral" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Text text="Notes go here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </content>
-                    </IconTabFilter>
+                  	<IconTabFilter
+				    icon="sap-icon://notes"
+				    key="notes"
+                    text="Notizen">
+			        </IconTabFilter>
                 </items>
                 <content>
                     <Text text="Tab Bar Content goes here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -178,6 +182,7 @@
         </footer>				
 			</Page>
 			<Page
+
 				id="detailDetail"
 				title="Page 2"
 				backgroundDesign= "Solid"
@@ -203,27 +208,22 @@
 	    <List
 		items="{/A_PurchaseOrder}">
 		<ObjectListItem
-			title="{PurchaseOrder}"
+			title="{Supplier}"
 			type="Active"
 			press="onListItemPress"
-			number="{
-				parts:[{path:'Price'},{path:'CurrencyCode'}],
-				type: 'sap.ui.model.type.Currency',
-				formatOptions: {showMeasure: false}
-			}"
-			numberUnit="{CurrencyCode}">
+            navButtonPress=".onPressMasterBack">
+    
 			<firstStatus>
 				<ObjectStatus
-					text="{Supplier}"
+					text="{PurchaseOrderDate}"
 					state="{
 						path: 'Status',
 						formatter: 'sap.m.sample.ObjectListItem.Formatter.status'
 					}" />
 			</firstStatus>
-			<ObjectAttribute text="{WeightMeasure} {WeightUnit}" />
-			<ObjectAttribute text="{PurchaseOrderDate}" />
+			<ObjectAttribute text="{PurchaseOrder}" />
 		</ObjectListItem>
-	</List>
+    </List>
 			</Page>
 		</masterPages>
 	</SplitApp>

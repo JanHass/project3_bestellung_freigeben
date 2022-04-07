@@ -10,11 +10,14 @@
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
-    "dataSources": {
-      "mainService": {
+    "dataSources": 
+    {
+      "mainService": 
+      {
         "uri": "/sap/opu/odata/",
         "type": "OData",
-        "settings": {
+        "settings": 
+        {
           "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
@@ -88,38 +91,29 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project3bestellungfreigeben.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "viewPath": "project3bestellungfreigeben.view"
       },
       "routes": [
         {
           
 
           "name": "Master",
-          "view": "Master",
           "pattern": "",
-          "targetAggregation": "masterPages",
-          "targetControl": "splitapp",
+          "target": ["OrderList"]
 
-          "subroutes": 
-          [{ 
-              "name": "Detail",
-              "view": "Detail",
-              "pattern": "",
-              "targetAggregation": "detailPages"
-          }]
+          
 
         }
       ],
       "targets": {
-        "TargetApp": {
+        "OrderList": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "app",
-          "viewName": "app"
+          "viewId": "_OrderList",
+          "viewName": "Master",
+          "controlId": "splitapp",
+          "controlAggregation": "masterPages"
         }
       }
     },
@@ -129,5 +123,7 @@
       "async": true,
       "id": "app"
     }
+
+    
   }
 }

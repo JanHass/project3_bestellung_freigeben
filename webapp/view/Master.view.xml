@@ -5,10 +5,33 @@
 >
     <App>
         <pages>
-            <Page title="Master">
+            <Page title="Bestellungen">
                 <content>
-                    <Label text="Master Test"/>
+                    <List items="{/orders}" mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
+                        <infoToolbar/>
+                        <headerToolbar>
+                            <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                <content>
+                                    <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%"/>
+                                </content>
+                            </Toolbar>
+                        </headerToolbar>
+                        <items>
+                            <StandardListItem
+                                title="{Company}"
+                                number="{pricetotal}"
+                                numberUnit="{currency}"
+                                type="Navigation"
+                                press="handleOrderSelect"
+                            >
+                                
+                            </StandardListItem>
+                        </items>   
+                    </List>
                 </content>
+                <footer>
+
+                </footer>
             </Page>
         </pages>
     </App>

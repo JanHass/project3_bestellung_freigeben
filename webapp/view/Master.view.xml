@@ -2,12 +2,17 @@
     controllerName="project3bestellungfreigeben.controller.Master"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
->
+    xmlns:tnt="sap.tnt"
+    xmlns:form="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+
     <App>
         <pages>
             <Page title="Bestellungen">
                 <content>
-                    <List items="{/orders}" mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
+                    <List items="{/A_Purchase_Order}" mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
                         <infoToolbar/>
                         <headerToolbar>
                             <Toolbar enabled="true" visible="true" width="" design="Solid">
@@ -18,9 +23,8 @@
                         </headerToolbar>
                         <items>
                             <StandardListItem
-                                title="{Company}"
-                                number="{pricetotal}"
-                                numberUnit="{currency}"
+                                title="{Supplier}"
+                                number="{PurchaseOrder}"
                                 type="Navigation"
                                 press="handleOrderSelect"
                             >

@@ -12,12 +12,12 @@
     "resources": "resources.json",
     "dataSources": {
       "mainService": {
-        "uri": "/sap/opu/odata/",
+        "uri": "/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
         "type": "OData",
         "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
-          "odataVersion": "4.0"
+          "odataVersion": "2.0"
         }
       }
     }
@@ -95,10 +95,17 @@
       },
       "routes": [
         {
-          "name": "RouteView1",
-          "pattern": "RouteView1",
+          "name": "View1",
+          "pattern": "View1",
           "target": [
             "TargetView1"
+          ]
+        },
+        {
+          "name": "Login",
+          "pattern": "RouteLogin",
+          "target": [
+            "TargetLogin"
           ]
         }
       ],
@@ -109,14 +116,21 @@
           "clearControlAggregation": false,
           "viewId": "View1",
           "viewName": "View1"
+        },
+        "TargetLogin": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Login",
+          "viewName": "Login"
         }
       }
     },
     "rootView": {
-      "viewName": "project3bestellungfreigeben.view.View1",
+      "viewName": "project3bestellungfreigeben.view.Login",
       "type": "XML",
       "async": true,
-      "id": "View1"
+      "id": "Login"
     }
   }
 }

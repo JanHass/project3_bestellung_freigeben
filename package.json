@@ -1,22 +1,28 @@
 {
   "name": "project3_bestellung_freigeben",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "author": "SAP SE",
   "private": true,
-  "description": "FWPM Fiori - App Entwicklung zur Bestellfreigabe",
+  "description": "UI5 Demo App - Bestellfreigabe",
   "keywords": [
     "ui5",
     "openui5",
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
+  "dependencies": {
+    "@openui5/sap.m": "^1",
+    "@openui5/sap.ui.core": "^1",
+    "@openui5/sap.ui.layout": "^1",
+    "@openui5/themelib_sap_belize": "^1"
+  },
   "devDependencies": {
     "@ui5/cli": "^2.14.1",
     "@sap/ux-ui5-tooling": "1"
   },
   "scripts": {
-    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#project3bestellungfreigeben-display\"",
-    "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#project3bestellungfreigeben-display\"",
+    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#bestellungfreigeben-display\"",
+    "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#bestellungfreigeben-display\"",
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "deploy": "fiori verify",
     "deploy-config": "fiori add deploy-config",

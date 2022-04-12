@@ -1,12 +1,11 @@
 <mvc:View
     controllerName="project3bestellungfreigeben.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
-
+    xmlns:tnt="sap.tnt"
     xmlns:form="sap.ui.layout.form"
     displayBlock="true"
     xmlns="sap.m"
     xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
->
     <SplitApp
 		id="SplitAppDemo"
 		initialDetail="detail"
@@ -20,8 +19,13 @@
                 showHeader="true" 
                 showFooter="true" 
                 showNavButton="false">
+            
+	
+                
 
+                
                 <content>
+                
                     <ObjectHeader intro="" title="Bosch" icon="sap-icon://cart" number="1,000" numberUnit="EUR" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
                         <attributes/>
                         <statuses>
@@ -29,6 +33,7 @@
                         </statuses>
                         <markers/>
                     </ObjectHeader>
+                
 
                 <form:Form width="100%" editable="false" visible="true">
                 <form:title/>
@@ -86,7 +91,7 @@
 
                     <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
                 <items>
-                    <IconTabFilter icon="sap-icon://hint" iconColor="Positive" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                    <IconTabFilter icon="sap-icon://hint"   text="Informationen" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
                         <content>
                             <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
                                 <infoToolbar/>
@@ -155,22 +160,17 @@
                             </Table>
                         </content>
                     </IconTabFilter>
-                    <IconTabSeparator icon="" iconDensityAware="false"/>
-                    <IconTabFilter icon="sap-icon://notes" iconColor="Neutral" text="" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Text text="Notes go here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                        </content>
-                    </IconTabFilter>
+                  	<IconTabFilter
+				    icon="sap-icon://notes"
+				    key="notes"
+                    text="Notizen">
+			        </IconTabFilter>
                 </items>
                 <content>
                     <Text text="Tab Bar Content goes here ..." width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                 </content>
             </IconTabBar>
-            
-              
-                
             </content>
-
             <footer>
             <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
                 <content>
@@ -179,11 +179,10 @@
                     <Button text="Ablehnen" type="Reject" icon="sap-icon://thumb-down" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                 </content>
             </OverflowToolbar>
-        </footer>
-				
-				
+        </footer>				
 			</Page>
 			<Page
+
 				id="detailDetail"
 				title="Page 2"
 				backgroundDesign= "Solid"
@@ -200,78 +199,31 @@
 					</RadioButtonGroup>
 				</VBox>
 			</Page>
-			<Page
-				id="detail2"
-				title="Detail 3 Page"
-				backgroundDesign= "Solid"
-				showNavButton="true"
-				navButtonPress=".onPressDetailBack">
-				<Label text="This is Detail Page3" />
-				<Input/>
-				<Label text="Label 2" />
-				<Input/>
-				<Label text="Label 3" />
-				<Input/>
-				<Label text="Label 4" />
-				<Input/>
-				<Label text="Label 5" />
-				<Input/>
-			</Page>
 		</detailPages>
 		<masterPages>
-			
 			<Page
 				id="master2"
 				title="Bestellungen"
-				backgroundDesign="List">
-				<List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" itemPress="_onObjectListItemPress">
-                <infoToolbar/>
-                <headerToolbar>
-                    <Toolbar enabled="true" visible="true" width="" design="Solid">
-                        <content>
-                            <SearchField placeholder="Suche" showSearchButton="true" visible="true" width="100%"/>
-                        </content>
-                    </Toolbar>
-                </headerToolbar>
-                <items>
-                    <ObjectListItem intro="" title="Bosch" number="1.000" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000004" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus title="" text="Heute" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="Cube Ryde" number="450,60" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000003" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="Heute" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="fahrrad.de" number="134.430" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000002" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="30.03.2022" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                    <ObjectListItem intro="" title="Rahmen Müller" number="4.600" numberUnit="EUR" numberState="None" type="Active" selected="false" showMarkers="false">
-                        <attributes>
-                            <ObjectAttribute text="450000001" active="false" visible="true"/>
-                        </attributes>
-                        <firstStatus>
-                            <ObjectStatus text="15.03.2022" state="None" visible="true"/>
-                        </firstStatus>
-                        <secondStatus/>
-                    </ObjectListItem>
-                </items>
-            </List>
+				backgroundDesign="List">	
+	    <List
+		items="{/A_PurchaseOrder}">
+		<ObjectListItem
+			title="{Supplier}"
+			type="Active"
+			press="onListItemPress"
+            navButtonPress=".onPressMasterBack">
+    
+			<firstStatus>
+				<ObjectStatus
+					text="{PurchaseOrderDate}"
+					state="{
+						path: 'Status',
+						formatter: 'sap.m.sample.ObjectListItem.Formatter.status'
+					}" />
+			</firstStatus>
+			<ObjectAttribute text="{PurchaseOrder}" />
+		</ObjectListItem>
+    </List>
 			</Page>
 		</masterPages>
 	</SplitApp>

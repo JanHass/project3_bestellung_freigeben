@@ -1,0 +1,33 @@
+<mvc:View
+    controllerName="project3bestellungfreigeben.controller.Login"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                 <Page id="page" title="{i18n>title}">            
+                    <content>
+                        <tnt:ToolHeader>
+                        <Button icon="sap-icon://menu2" type="transparent"/>
+                        <ToolbarSpacer/>
+                        <Text text="Anmelden"/>
+                        <ToolbarSpacer/>
+                        <Button text="Herzlich Wilkommen" type="transparent"/>
+                         </tnt:ToolHeader>
+                         <VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+                         <items>
+                         <Label text="Geben Sie Ihre Anmeldedaten ein:"/>
+                         <Input placeholder="Benutzer" id="inp_usernameId"/>
+                         <Input placeholder="Passwort" type="Password" id="inp_passwordId"/>
+                         <Button width="11.5rem" text="Anmelden" type="Emphasized" press="onLoginUser"/>
+                         </items>
+                         </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

@@ -2,8 +2,13 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/Device",
-	"sap/base/Log"
-], function (MessageToast, Controller, Device, Log) {
+	"sap/base/Log",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/m/MessageBox",
+	"sap/ui/thirdparty/jquery",
+	"sap/ui/model/json/JSONModel",
+], function (MessageToast, Controller, Device, Log, MessageBox, Filter, FilterOperator,jQuery,JSONModel) {
 	"use strict";
 
 	return Controller.extend("project3bestellungfreigeben.controller.View1", {
@@ -63,6 +68,5 @@ sap.ui.define([
 			}
 			return result;
 		}
-
 	});
 });

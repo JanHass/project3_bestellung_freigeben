@@ -39,8 +39,8 @@ sap.ui.define([
 							"tiles": [{
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
-									"title": "Bestellung freigeben",
-									"targetURL": "#project3bestellungfreigeben-display"
+									"title": "odata_tmp_1",
+									"targetURL": "#odatatmp1-display"
 								}
 							}]
 						}]
@@ -51,18 +51,18 @@ sap.ui.define([
 				"adapter": {
 					"config": {
 						"inbounds": {
-							"project3bestellungfreigeben-display": {
-								"semanticObject": "project3bestellungfreigeben",
+							"odatatmp1-display": {
+								"semanticObject": "odatatmp1",
 								"action": "display",
-								"description": "FWPM Fiori - App Entwicklung zur Bestellfreigabe",
-								"title": "Bestellung freigeben",
+								"description": "A Fiori application.",
+								"title": "odata_tmp_1",
 								"signature": {
 									"parameters": {}
 								},
 								"resolutionResult": {
 									"applicationType": "SAPUI5",
-									"additionalInformation": "SAPUI5.Component=project3bestellungfreigeben",
-									"url": sap.ui.require.toUrl("project3bestellungfreigeben")
+									"additionalInformation": "SAPUI5.Component=odatatmp1",
+									"url": sap.ui.require.toUrl("odatatmp1")
 								}
 							}
 						}

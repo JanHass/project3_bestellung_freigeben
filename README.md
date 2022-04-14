@@ -1,37 +1,31 @@
-FHWS FWPM Fiori SS22:
-Aufgabe: Bestellungen freigeben.
-
-Team:
-Endres, Moritz;
-Fuchs, Julia;
-Haß, Jan Mika;
-Stark, Annalena
-
-
-
-
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Sat Apr 02 2022 10:03:36 GMT+0200 (Mitteleuropäische Sommerzeit)|
+|**Generation Date and Time**<br>Wed Apr 13 2022 12:54:06 GMT+0200 (Mitteleuropäische Sommerzeit)|
 |**App Generator**<br>@sap/generator-fiori-freestyle|
 |**App Generator Version**<br>1.5.2|
 |**Generation Platform**<br>Visual Studio Code|
-|**Floorplan Used**<br>simple|
-|**Service Type**<br>None|
-|**Service URL**<br>N/A
-|**Module Name**<br>project3_bestellung_freigeben|
-|**Application Title**<br>Bestellung freigeben|
+|**Floorplan Used**<br>2listdetail|
+|**Service Type**<br>OData Url|
+|**Service URL**<br>https://s4h.ososoft.de:44300/sap/opu/odata/sap/ZOSO_PURCHASEORDER
+|**Module Name**<br>odata_tmp_1|
+|**Application Title**<br>odata_tmp_1|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_fiori_3|
-|**UI5 Version**<br>1.99.0|
+|**UI5 Version**<br>1.84.1|
 |**Enable Code Assist Libraries**<br>False|
 |**Add Eslint configuration**<br>False|
 |**Enable Telemetry**<br>True|
+|**Object collection**<br>A_PurchaseOrder|
+|**Object collection key**<br>PurchaseOrder|
+|**Object ID**<br>PurchaseOrder|
+|**entityType**<br>to_PurchaseOrderItem|
+|**entitySet**<br>A_PurchaseOrderItem|
+|**Line item collection key**<br>PurchaseOrder|
 
-## project3_bestellung_freigeben
+## odata_tmp_1
 
-FWPM Fiori - App Entwicklung zur Bestellfreigabe
+A Fiori application.
 
 ### Starting the generated app
 

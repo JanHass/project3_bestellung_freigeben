@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"project3_bestellung_freigeben/test/unit/AllTests"
+		"odatatmp1/test/unit/AllTests"
 	], function () {
 		QUnit.start();
 	});

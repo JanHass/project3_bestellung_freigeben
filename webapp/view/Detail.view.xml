@@ -1,18 +1,146 @@
 <mvc:View
-    controllerName="project3bestellungfreigeben.controller.Detail"
-    xmlns:mvc="sap.ui.core.mvc"
+    controllerName="odatatmp1.controller.Detail"
     xmlns="sap.m"
->
-    <App>
-        <pages>
-            <Page title="Detail">
-                <content>
-                    <Label text="Detail Test"/>
-                </content>
-            </Page>
-        </pages>
-    </App>
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:layout="sap.ui.layout" 
+    xmlns:form="sap.ui.layout.form">
 
 
+    <semantic:SemanticPage
+        id="detailPage"
+        busy="{detailView>/busy}"
+        busyIndicatorDelay="{detailView>/delay}">
+        
+                <semantic:titleHeading>
+            
+                    <Text title="{i18n>priceTitle}"/>
+                    <Title
+                        text="{Supplier}"
+                        level="H2" /> 
+                
+                </semantic:titleHeading>
+                <ObjectHeader intro="" title="{Supplier}" icon="" number="{path: 'CompanyCode', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="{DocumentCurrency}" numberState="None" titleActive="true" backgroundDesign="Translucent" condensed="false" visible="true" titlePress="_onObjectHeaderTitlePress">
+                        <attributes>
+                            <ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
+                        </attributes>
+                        <statuses>
+                            <ObjectStatus text="Today" state="None" visible="true"/>
+                        </statuses>
+                        <markers/>
+                </ObjectHeader>
+         
+        <semantic:headerContent>
+            
+            <form:Form width="100%" editable="false" visible="true">
+                <form:title/>
+                    <form:formContainers>
+                        <form:FormContainer visible="true">
+                            <form:formElements>
+                                <form:FormElement visible="true">
+                                    <form:label>
+                                        <Label text="Purchase Order" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:label>
+                                    <form:fields>
+                                        <Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                                                                               
+                                <form:FormElement visible="true">
+                                    <form:label>
+                                        <Label text="Payment Terms" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:label>
+                                    <form:fields>
+                                        <Text text="{PaymentTerms}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+                                
+                                <form:FormElement visible="true">
+                                    <form:label>
+                                        <Label text="Company Code" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:label>
+                                    <form:fields>
+                                        <Text text="{CompanyCode}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </form:fields>
+                                </form:FormElement>
+                            </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="4" columnsM="1" labelSpanM="4" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+        </semantic:headerContent>
+        <semantic:content>
+
+            <Table
+                id="lineItemsList"
+                width="auto"
+                items="{A_PurchaseOrderItem}"
+                updateFinished=".onListUpdateFinished"
+                noDataText="{i18n>detailLineItemTableNoDataText}"
+                busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+                <headerToolbar>
+                    <Toolbar>
+                        <Title
+                            id="lineItemsTitle"
+                            text="{detailView>/lineItemListTitle}"
+                            titleStyle="H3"
+                            level="H3"/>
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column>
+                        <Text text="{i18n>detailLineItemTableIDColumn}"/>
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        hAlign="End">
+                        <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectIdentifier
+                                title="{}"
+                                text="{PurchaseOrder}"/>
+                            <ObjectNumber />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
+
+
+        <!--Semantic ShareMenu Buttons-->
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction
+                id="shareEmail"
+                press=".onSendEmailPress"/>
+        </semantic:sendEmailAction>
+
+        <semantic:closeAction>
+            <semantic:CloseAction
+                    id="closeColumn"
+                    press=".onCloseDetailPress"/>
+        </semantic:closeAction>
+
+        <semantic:fullScreenAction>
+            <semantic:FullScreenAction
+                    id="enterFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:fullScreenAction>
+        <semantic:exitFullScreenAction>
+            <semantic:ExitFullScreenAction
+                    id="exitFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:exitFullScreenAction>
+
+    </semantic:SemanticPage>
 
 </mvc:View>

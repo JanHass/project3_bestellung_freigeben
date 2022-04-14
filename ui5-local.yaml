@@ -2,11 +2,11 @@
 
 specVersion: "2.5"
 metadata:
-  name: project3bestellungfreigeben
+  name: odatatmp1
 type: application
 framework:
   name: SAPUI5
-  version: 1.99.0
+  version: 1.84.1
   libraries:
     - name: sap.m
     - name: sap.ui.core
@@ -44,5 +44,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: project3bestellungfreigeben
+        component: odatatmp1
         ui5Theme: sap_fiori_3

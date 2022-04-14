@@ -1,7 +1,7 @@
 {
-  "_version": "1.32.0",
+  "_version": "1.28.0",
   "sap.app": {
-    "id": "project3bestellungfreigeben",
+    "id": "odatatmp1",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -10,14 +10,11 @@
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
-    "dataSources": 
-    {
-      "mainService": 
-      {
+    "dataSources": {
+      "mainService": {
         "uri": "/sap/opu/odata/sap/ZOSO_PURCHASEORDER/",
         "type": "OData",
-        "settings": 
-        {
+        "settings": {
           "annotations": [],
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
@@ -44,7 +41,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.99.0",
+      "minUI5Version": "1.84.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -64,66 +61,75 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project3bestellungfreigeben.i18n.i18n"
+          "bundleName": "odatatmp1.i18n.i18n"
         }
       },
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupId": "$direct"
-        }
+        "settings": {}
       }
     },
     "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
+      "css": []
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
-        "async": true,
-        "viewPath": "project3bestellungfreigeben.view"
+        "viewPath": "odatatmp1.view",
+        "controlId": "layout",
+        "controlAggregation": "beginColumnPages",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
       },
       "routes": [
         {
-          
-
-          "name": "Master",
           "pattern": "",
-          "target": ["OrderList"]
-
-          
-
+          "name": "list",
+          "target": "list"
+        },
+        {
+          "pattern": "A_PurchaseOrder/{objectId}",
+          "name": "object",
+          "target": [
+            "list",
+            "object"
+          ]
         }
       ],
       "targets": {
-        "OrderList": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "_OrderList",
-          "viewName": "Master",
-          "controlId": "splitapp",
-          "controlAggregation": "masterPages"
+        "list": {
+          "viewName": "List",
+          "viewLevel": 1,
+          "viewId": "list"
+        },
+        "object": {
+          "viewName": "Detail",
+          "viewId": "detail",
+          "viewLevel": 1,
+          "controlAggregation": "midColumnPages"
+        },
+        "detailObjectNotFound": {
+          "viewName": "DetailObjectNotFound",
+          "viewId": "detailObjectNotFound",
+          "controlAggregation": "midColumnPages"
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
         }
       }
     },
     "rootView": {
-      "viewName": "project3bestellungfreigeben.view.app",
+      "viewName": "odatatmp1.view.App",
       "type": "XML",
       "async": true,
       "id": "app"
     }
-
-    
   }
 }

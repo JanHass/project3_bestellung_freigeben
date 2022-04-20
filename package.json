@@ -1,16 +1,9 @@
 {
-<<<<<<< HEAD
-  "name": "project3_bestellung_freigeben",
-  "version": "1.0.0",
-  "author": "SAP SE",
-  "private": true,
-  "description": "UI5 Demo App - Bestellfreigabe",
-=======
+
   "name": "odata_tmp_1",
   "version": "0.0.1",
   "private": true,
   "description": "A Fiori application.",
->>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
   "keywords": [
     "ui5",
     "openui5",
@@ -29,13 +22,9 @@
     "@sap/ux-ui5-fe-mockserver-middleware": "1"
   },
   "scripts": {
-<<<<<<< HEAD
-    "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#bestellungfreigeben-display\"",
-    "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#bestellungfreigeben-display\"",
-=======
+
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#odatatmp1-display\"",
     "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#odatatmp1-display\"",
->>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "deploy": "fiori verify",
     "deploy-config": "fiori add deploy-config",

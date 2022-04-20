@@ -89,10 +89,7 @@
       },
       "routes": [
         {
-<<<<<<< HEAD
-          "name": "View1",
-          "pattern": "View1",
-=======
+
           "pattern": "",
           "name": "list",
           "target": "list"
@@ -100,7 +97,7 @@
         {
           "pattern": "A_PurchaseOrder/{objectId}",
           "name": "object",
->>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
+
           "target": [
             "list",
             "object"
@@ -115,21 +112,6 @@
         }
       ],
       "targets": {
-<<<<<<< HEAD
-        "TargetView1": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
-        },
-        "TargetLogin": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "Login",
-          "viewName": "Login"
-=======
         "list": {
           "viewName": "List",
           "viewLevel": 1,
@@ -149,22 +131,14 @@
         "notFound": {
           "viewName": "NotFound",
           "viewId": "notFound"
->>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
         }
       }
     },
     "rootView": {
-<<<<<<< HEAD
-      "viewName": "project3bestellungfreigeben.view.Login",
-      "type": "XML",
-      "async": true,
-      "id": "Login"
-=======
       "viewName": "odatatmp1.view.App",
       "type": "XML",
       "async": true,
       "id": "app"
->>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
     }
   }
 }

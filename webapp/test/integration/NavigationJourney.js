@@ -2,20 +2,12 @@
 
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/View1"
+	"./pages/List",
+	"./pages/Detail",
+	"./pages/App"
 ], function (opaTest) {
 	"use strict";
 
-	QUnit.module("Navigation Journey");
+	QUnit.module("Desktop navigation");
 
-	opaTest("Should see the initial page of the app", function (Given, When, Then) {
-		// Arrangements
-		Given.iStartMyApp();
-
-		// Assertions
-		Then.onTheAppPage.iShouldSeeTheApp();
-
-		//Cleanup
-		Then.iTeardownMyApp();
-	});
 });

@@ -1,5 +1,7 @@
 sap.ui.define([
-	"project3_bestellung_freigeben/test/unit/controller/View1.controller"
-], function () {
+	"./model/models",
+	"./model/formatter",
+	"./controller/ListSelector"
+], function() {
 	"use strict";
 });

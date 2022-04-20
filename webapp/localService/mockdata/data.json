@@ -1,0 +1,34 @@
+{
+    "orders" : [
+    {
+     "company": "Bosch",
+     "orderno": 20220402001,
+     "pricetotal": 5000,
+     "currency": "EUR",
+     "datecreated": 2022,
+     "pos10": "Helm",
+     "pos20": "Fahrrad",
+     "pos30": "Licht"
+    },
+    {
+     "company": "Fahrrad.de",
+     "orderno": 20220402002,
+     "pricetotal": 2534,
+     "currency": "EUR",
+     "datecreated": 2022,
+     "pos10": "Kette",
+     "pos20": "Halter",
+     "pos30": null
+    },
+    {
+     "company": "Fahrrad.de",
+     "orderno": 20220402003,
+     "pricetotal": 1845,
+     "currency": "EUR",
+     "datecreated": 2022,
+     "pos10": "Fett",
+     "pos20": "Sattel",
+     "pos30": "Lack Rot"
+    }
+]
+}

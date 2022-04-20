@@ -2,7 +2,11 @@
 
 specVersion: "2.5"
 metadata:
+<<<<<<< HEAD
   name: project3bestellungfreigeben
+=======
+  name: odatatmp1
+>>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
 type: application
 server:
   customMiddleware:

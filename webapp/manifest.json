@@ -1,7 +1,7 @@
 {
-  "_version": "1.32.0",
+  "_version": "1.28.0",
   "sap.app": {
-    "id": "project3bestellungfreigeben",
+    "id": "odatatmp1",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -41,7 +41,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.99.0",
+      "minUI5Version": "1.84.1",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -61,44 +61,49 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project3bestellungfreigeben.i18n.i18n"
+          "bundleName": "odatatmp1.i18n.i18n"
         }
       },
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server",
-          "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupId": "$direct"
-        }
+        "settings": {}
       }
     },
     "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
+      "css": []
     },
     "routing": {
       "config": {
-        "routerClass": "sap.m.routing.Router",
+        "routerClass": "sap.f.routing.Router",
         "viewType": "XML",
-        "async": true,
-        "viewPath": "project3bestellungfreigeben.view",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "viewPath": "odatatmp1.view",
+        "controlId": "layout",
+        "controlAggregation": "beginColumnPages",
+        "bypassed": {
+          "target": [
+            "notFound"
+          ]
+        },
+        "async": true
       },
       "routes": [
         {
+<<<<<<< HEAD
           "name": "View1",
           "pattern": "View1",
+=======
+          "pattern": "",
+          "name": "list",
+          "target": "list"
+        },
+        {
+          "pattern": "A_PurchaseOrder/{objectId}",
+          "name": "object",
+>>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
           "target": [
-            "TargetView1"
+            "list",
+            "object"
           ]
         },
         {
@@ -110,6 +115,7 @@
         }
       ],
       "targets": {
+<<<<<<< HEAD
         "TargetView1": {
           "viewType": "XML",
           "transition": "slide",
@@ -123,14 +129,42 @@
           "clearControlAggregation": false,
           "viewId": "Login",
           "viewName": "Login"
+=======
+        "list": {
+          "viewName": "List",
+          "viewLevel": 1,
+          "viewId": "list"
+        },
+        "object": {
+          "viewName": "Detail",
+          "viewId": "detail",
+          "viewLevel": 1,
+          "controlAggregation": "midColumnPages"
+        },
+        "detailObjectNotFound": {
+          "viewName": "DetailObjectNotFound",
+          "viewId": "detailObjectNotFound",
+          "controlAggregation": "midColumnPages"
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+>>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
         }
       }
     },
     "rootView": {
+<<<<<<< HEAD
       "viewName": "project3bestellungfreigeben.view.Login",
       "type": "XML",
       "async": true,
       "id": "Login"
+=======
+      "viewName": "odatatmp1.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+>>>>>>> 1e6feb7e4a9b6806d51396b6669ea37cf64e3c6d
     }
   }
 }

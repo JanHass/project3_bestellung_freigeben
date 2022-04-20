@@ -2,7 +2,7 @@
 
 specVersion: "2.5"
 metadata:
-  name: project3bestellungfreigeben
+  name: odatatmp1
 type: application
 server:
   customMiddleware:
@@ -27,7 +27,7 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: project3bestellungfreigeben
+        component: odatatmp1
         ui5Theme: sap_fiori_3
 
 

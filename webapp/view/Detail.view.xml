@@ -13,22 +13,11 @@
         busyIndicatorDelay="{detailView>/delay}">
         
                 <semantic:titleHeading>
-            
-                    <Text title="{i18n>priceTitle}"/>
                     <Title
                         text="{Supplier}"
                         level="H2" /> 
-                
                 </semantic:titleHeading>
-                <ObjectHeader intro="" title="{Supplier}" icon="" number="{path: 'CompanyCode', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="{DocumentCurrency}" numberState="None" titleActive="true" backgroundDesign="Translucent" condensed="false" visible="true" titlePress="_onObjectHeaderTitlePress">
-                        <attributes>
-                            <ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
-                        </attributes>
-                        <statuses>
-                            <ObjectStatus text="Today" state="None" visible="true"/>
-                        </statuses>
-                        <markers/>
-                </ObjectHeader>
+               
          
         <semantic:headerContent>
             
@@ -77,37 +66,46 @@
             <Table
                 id="lineItemsList"
                 width="auto"
-                items="{A_PurchaseOrderItem}"
+                items="{to_PurchaseOrderItem}"
                 updateFinished=".onListUpdateFinished"
                 noDataText="{i18n>detailLineItemTableNoDataText}"
                 busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-                <headerToolbar>
-                    <Toolbar>
-                        <Title
-                            id="lineItemsTitle"
-                            text="{detailView>/lineItemListTitle}"
-                            titleStyle="H3"
-                            level="H3"/>
-                    </Toolbar>
-                </headerToolbar>
                 <columns>
                     <Column>
-                        <Text text="{i18n>detailLineItemTableIDColumn}"/>
+                        <Text text="Positon"/>
                     </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        hAlign="End">
-                        <Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+                </columns>
+                <columns>
+                    <Column>
+                        <Text text="Produktname"/>
+                    </Column>
+                </columns>
+                 <columns>
+                    <Column>
+                        <Text text="Anzahl"/>
+                    </Column>
+                </columns>
+                 <columns>
+                    <Column>
+                        <Text text="Stückpreis"/>
+                    </Column>
+                </columns>
+                 <columns>
+                    <Column>
+                        <Text text="Zwischensumme"/>
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <ObjectIdentifier
-                                title="{}"
-                                text="{PurchaseOrder}"/>
-                            <ObjectNumber />
+                             <Text  text="{PurchaseOrderItem}"/>
+                             <Text  text="{PurchaseOrderItemText}"/>
+                             <Text  text="{OrderQuantity}"/>
+                             <Text  text="{NetPriceAmount}"/>
+                             
+                            
+                            
+                            
                         </cells>
                     </ColumnListItem>
                 </items>

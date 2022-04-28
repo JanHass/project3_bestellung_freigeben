@@ -131,7 +131,8 @@
 </content>
 </IconTabFilter>
 <IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
-				<Text text="Notes go here ..." />
+				<Text text="showExceededText = false;"class="sapUiTinyMarginTop" />
+                <TextArea value="Lorem ipsum dolor sit amet, consectetur el" maxLength="40" width="100%"/>
 			</IconTabFilter>
 </items>
 </IconTabBar>

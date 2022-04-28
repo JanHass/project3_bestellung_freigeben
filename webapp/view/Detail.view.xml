@@ -133,7 +133,7 @@
 </IconTabFilter>
 <IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
 					<TextArea valueState="Information" placeholder="Notizen:" width="100%"/>
-                    <Button text="Speichern" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                    <Button text="Speichern" type="Transparent" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
                			</IconTabFilter>
 </items>
 </IconTabBar>

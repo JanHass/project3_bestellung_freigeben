@@ -27,7 +27,7 @@
 <form:formElements>
 <form:FormElement visible="true">
 <form:label>
-<Label text="{i18n>oderer_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="{i18n>order_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
 </form:label>
 <form:fields>
 <Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>

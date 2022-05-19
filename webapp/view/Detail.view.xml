@@ -1,24 +1,26 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" controllerName="odatatmp1.controller.Detail">
-    <Page>
-        <content>
-            <layout:VerticalLayout width="100%" visible="true">
-            <layout:content>
-            <ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
-            <attributes>
-                <ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
-            </attributes>
-            <statuses>
-                <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
-                <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
-            </statuses>
-            <markers/>
-            </ObjectHeader>
-            </layout:content>
-            </layout:VerticalLayout>
-            <IconTabBar expandable="true" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
-            <items>
 
-<IconTabFilter icon="sap-icon://hint" key="info" text="{i18n>information}">
+<Page>
+<content>
+<layout:VerticalLayout width="100%" visible="true">
+<layout:content>
+<ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
+<attributes>
+<ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
+</attributes>
+<statuses>
+<ObjectStatus text="{OrderQuantity}"/>
+<ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
+<ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
+</statuses>
+<markers/>
+</ObjectHeader>
+</layout:content>
+</layout:VerticalLayout>
+<IconTabBar expandable="true" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+<items>
+<IconTabFilter icon="sap-icon://hint" key="info" text="Informationen">
+
 <content>
 <form:Form width="100%" editable="false" visible="true">
 <form:title/>
@@ -117,6 +119,7 @@
 <Text  text="{PurchaseOrderItemText}"/>
 <Text  text="{OrderQuantity}"/>
 <Text  text="{NetPriceAmount}"/>
+<Text text="{= ${OrderQuantity}*${NetPriceAmount}}"/>
 </cells>
 </ColumnListItem>
 </items>
@@ -129,9 +132,6 @@
 </items>
 </IconTabBar>
 <form:ResponsiveGridLayout columnsM="1" columnsL="2" emptySpanL="0" emptySpanM="0" emptySpanS="0" visible="true" labelSpanS="12" labelSpanM="2" labelSpanL="4"/>
-
-
-
 </content>
 <footer>
 <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">

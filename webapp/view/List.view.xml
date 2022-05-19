@@ -40,7 +40,7 @@
                     <OverflowToolbar>
                         <SearchField
                             id="searchField"
-                            placeholder="Suchen..."
+                            placeholder="{i18n>search}"
                             showRefreshButton="true"
                             tooltip="{i18n>listSearchTooltip}"
                             search=".onSearch"

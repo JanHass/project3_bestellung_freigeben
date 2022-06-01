@@ -1,150 +1,147 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" controllerName="odatatmp1.controller.Detail">
 
 <Page>
-<content>
-<layout:VerticalLayout width="100%" visible="true">
-<layout:content>
-<ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
-<attributes>
-<ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
-</attributes>
-<statuses>
-<ObjectStatus text="{OrderQuantity}"/>
-<ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
-<ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
-</statuses>
-<markers/>
-</ObjectHeader>
-</layout:content>
-</layout:VerticalLayout>
-<IconTabBar expandable="true" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
-<items>
-<IconTabFilter icon="sap-icon://hint" key="info" text="Informationen">
+    <content>
+        <layout:VerticalLayout width="100%" visible="true">
+        <layout:content>
+            <ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
+                <attributes>
+                    <ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
+                </attributes>
+                <statuses>
+                    <ObjectStatus text="{OrderQuantity}"/>
+                    <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
+                    <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
+                </statuses>
+                <markers/>
+            </ObjectHeader>
+        </layout:content>
+        </layout:VerticalLayout>
+        <IconTabBar expandable="true" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+            <items>
+                <IconTabFilter icon="sap-icon://hint" key="info" text="Informationen">
 
-<content>
-<form:Form width="100%" editable="false" visible="true">
-<form:title/>
-<form:formContainers>
-<form:FormContainer visible="true">
-<form:formElements>
-<form:FormElement visible="true">
-<form:label>
-<Label text="{i18n>order_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:label>
-<form:fields>
-<Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:fields>
-</form:FormElement>
-<form:FormElement visible="true">
-<form:label>
-<Label text="{i18n>supplier_name}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:label>
-<form:fields>
-<Text text="{AddressName}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:fields>
-</form:FormElement>
-<form:FormElement visible="true">
-<form:label>
-<Label text="{i18n>payment_terms}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:label>
-<form:fields>
-<Text text="{CashDiscount1Days} {i18n>days} {CashDiscount1Percent}%, {CashDiscount2Days} {i18n>days} {CashDiscount2Percent}%,{NetPaymentDays} net "  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</form:fields>
-</form:FormElement>
-</form:formElements>
-<form:title/>
-</form:FormContainer>
-</form:formContainers>
-<form:layout>
-<form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="4" columnsM="1" labelSpanM="4" labelSpanS="12"/>
-</form:layout>
-</form:Form>
-<Table
-    id="lineItemsList"
-    width="auto"
-    items="{to_PurchaseOrderItem}"
-    updateFinished=".onListUpdateFinished"
-    noDataText="{i18n>detailLineItemTableNoDataText}"
-    busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-<infoToolbar>
-<Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-<content>
-<Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</content>
-</Toolbar>
-</infoToolbar>
-<headerToolbar>
-<OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
-<content>
-<ToolbarSpacer width=""/>
-</content>
-</OverflowToolbar>
-</headerToolbar>
-<columns>
-<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
-<header>
-<Text text="{i18n>position}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</header>
-<footer/>
-</Column>
-<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-<header>
-<Text text="{i18n>product_name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</header>
-<footer/>
-</Column>
-<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-<header>
-<Text text="{i18n>quantity}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</header>
-<footer/>
-</Column>
-<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-<header>
-<Text text="{i18n>unit_price}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</header>
-<footer/>
-</Column>
-<Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-<header>
-<Text text="{i18n>subtotal}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-</header>
-<footer/>
-</Column>
-</columns>
-<items>
-<ColumnListItem type="Active">
-<cells>
-<Text  text="{PurchaseOrderItem}"/>
-<Text  text="{PurchaseOrderItemText}"/>
-<Text  text="{OrderQuantity}"/>
-<Text  text="{NetPriceAmount}"/>
-<Text text="{= ${OrderQuantity}*${NetPriceAmount}}"/>
-</cells>
-</ColumnListItem>
-</items>
-</Table>
-</content>
-</IconTabFilter>
-<IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
-	<TextArea valueState="Information" placeholder="Notizen:" width="100%"/>
-    <Button text="Speichern" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
-</IconTabFilter>
-</items>
-</IconTabBar>
-<form:ResponsiveGridLayout columnsM="1" columnsL="2" emptySpanL="0" emptySpanM="0" emptySpanS="0" visible="true" labelSpanS="12" labelSpanM="2" labelSpanL="4"/>
-</content>
-<footer>
-<OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
-<content>
-<ToolbarSpacer width=""/>
-<Button text="{i18n>accept}" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
-<Button text="{i18n>decline}" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
-</content>
-</OverflowToolbar>
-</footer>
-<headerContent/>
-<subHeader/>
-<customHeader/>
+                    <content>
+                        <form:Form width="100%" editable="false" visible="true">
+                            <form:title/>
+                            <form:formContainers>
+                                <form:FormContainer visible="true">
+                                    <form:formElements>
+                                        <form:FormElement visible="true">
+                                            <form:label>
+                                                <Label text="{i18n>order_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:label>
+                                            <form:fields>
+                                                <Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement visible="true">
+                                            <form:label>
+                                                <Label text="{i18n>supplier_name}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:label>
+                                            <form:fields>
+                                                <Text text="{AddressName}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                        <form:FormElement visible="true">
+                                            <form:label>
+                                                <Label text="{i18n>payment_terms}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:label>
+                                            <form:fields>
+                                                <Text text="{CashDiscount1Days} {i18n>days} {CashDiscount1Percent}%, {CashDiscount2Days} {i18n>days} {CashDiscount2Percent}%,{NetPaymentDays} net "  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            </form:fields>
+                                        </form:FormElement>
+                                    </form:formElements>
+                                    <form:title/>
+                                </form:FormContainer>
+                            </form:formContainers>
+                            <form:layout>
+                                <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="4" columnsM="1" labelSpanM="4" labelSpanS="12"/>
+                            </form:layout>
+                        </form:Form>
+                        <Table
+                            id="lineItemsList"
+                            width="auto"
+                            items="{to_PurchaseOrderItem}"
+                            updateFinished=".onListUpdateFinished"
+                            noDataText="{i18n>detailLineItemTableNoDataText}"
+                            busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+                            <infoToolbar>
+                                <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                    <content>
+                                        <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </content>
+                                </Toolbar>
+                            </infoToolbar>
+                            <headerToolbar>
+                                <OverflowToolbar width="auto" height="auto" design="Transparent" visible="true" enabled="true">
+                                    <content>
+                                        <ToolbarSpacer width=""/>
+                                    </content>
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                                    <header>
+                                        <Text text="{i18n>position}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </header>
+                                    <footer/>
+                                </Column>
+                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                    <header>
+                                        <Text text="{i18n>product_name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </header>
+                                    <footer/>
+                                </Column>
+                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                    <header>
+                                        <Text text="{i18n>quantity}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </header>
+                                    <footer/>
+                                </Column>
+                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                    <header>
+                                        <Text text="{i18n>unit_price}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </header>
+                                    <footer/>
+                                </Column>
+                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                    <header>
+                                        <Text text="{i18n>subtotal}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    </header>
+                                    <footer/>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem type="Active">
+                                    <cells>
+                                        <Text  text="{PurchaseOrderItem}"/>
+                                        <Text  text="{PurchaseOrderItemText}"/>
+                                        <Text  text="{OrderQuantity}"/>
+                                        <Text  text="{NetPriceAmount}"/>
+                                        <Text text="{= ${OrderQuantity}*${NetPriceAmount}}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+                </IconTabFilter>
+                <IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
+                    <TextArea valueState="Information" placeholder="Notizen:" width="100%"/>
+                    <Button text="Speichern" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+        <form:ResponsiveGridLayout columnsM="1" columnsL="2" emptySpanL="0" emptySpanM="0" emptySpanS="0" visible="true" labelSpanS="12" labelSpanM="2" labelSpanL="4"/>
+    </content>
+    <footer>
+        <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
+            <content>
+                <ToolbarSpacer width=""/>
+                <Button text="{i18n>accept}" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                <Button text="{i18n>decline}" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+            </content>
+        </OverflowToolbar>
+    </footer>
 </Page>
 </mvc:View>

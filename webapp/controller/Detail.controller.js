@@ -2,8 +2,10 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
-    "sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+    "sap/m/library",
+    "sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageBox, MessageToast) {
     "use strict";
 
     // shortcut for sap.m.URLHelper
@@ -34,23 +36,8 @@ sap.ui.define([
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
         },
 
-        /* =========================================================== */
-        /* event handlers                                              */
-        /* =========================================================== */
-
-        /**
-         * Event handler when the share by E-Mail button has been clicked
-         * @public
-         */
-        onSendEmailPress: function () {
-            var oViewModel = this.getModel("detailView");
-
-            URLHelper.triggerEmail(
-                null,
-                oViewModel.getProperty("/shareSendEmailSubject"),
-                oViewModel.getProperty("/shareSendEmailMessage")
-            );
-        },
+        
+        
 
         
         /**
@@ -106,6 +93,7 @@ sap.ui.define([
         _bindView: function (sObjectPath) {
             // Set busy indicator during view binding
             var oViewModel = this.getModel("detailView");
+            
 
             // If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
             oViewModel.setProperty("/busy", false);
@@ -146,10 +134,7 @@ sap.ui.define([
 
             this.getOwnerComponent().oListSelector.selectAListItem(sPath);
 
-            oViewModel.setProperty("/shareSendEmailSubject",
-                oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-            oViewModel.setProperty("/shareSendEmailMessage",
-                oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+            
         },
 
         _onMetadataLoaded: function () {
@@ -175,31 +160,49 @@ sap.ui.define([
             oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
         },
 
-        /**
-         * Set the full screen mode to false and navigate to list page
-         */
-        onCloseDetailPress: function () {
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
-            // No item should be selected on list after detail page is closed
-            this.getOwnerComponent().oListSelector.clearListListSelection();
-            this.getRouter().navTo("list");
-        },
+        
 
-        /**
-         * Toggle between full and non full screen mode.
-         */
-        toggleFullScreen: function () {
-            var bFullScreen = this.getModel("appView").getProperty("/actionButtonsInfo/midColumn/fullScreen");
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", !bFullScreen);
-            if (!bFullScreen) {
-                // store current layout and go full screen
-                this.getModel("appView").setProperty("/previousLayout", this.getModel("appView").getProperty("/layout"));
-                this.getModel("appView").setProperty("/layout", "MidColumnFullScreen");
-            } else {
-                // reset to previous layout
-                this.getModel("appView").setProperty("/layout",  this.getModel("appView").getProperty("/previousLayout"));
-            }
-        }
+        
+
+        _onAcceptMessageBoxPress: function () {
+			MessageBox.confirm("Approve purchase order 12345?", {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mbconfirm"),
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK)
+                    {
+                        
+
+                        var comment="current Comment insert here";
+                        var PONumber="PONumber";
+                        var postcall = "https://s4h.ososoft.de:44300/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV/Release?Comment='"+comment+"'&PONumber='"+PONumber+"'";
+                        
+                        MessageToast.show(postcall);
+                    };
+                }
+            });
+		},
+        _onDeclineMessageBoxPress: function () {
+			MessageBox.confirm("Decline purchase order 12345?", {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mbdecline"),
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK)
+                    {
+                        
+
+                        var comment="current Comment insert here";
+                        var PONumber="PONumber";
+                        var postcall = "https://s4h.ososoft.de:44300/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV/Reject?PONumber='"+PONumber+"'&Comment='"+comment+"'";
+                        
+                        MessageToast.show(postcall);
+                    };
+                }
+            });
+		},
+
+
+
     });
 
 });

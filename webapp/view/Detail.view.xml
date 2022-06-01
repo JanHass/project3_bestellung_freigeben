@@ -19,7 +19,7 @@
         </layout:VerticalLayout>
         <IconTabBar expandable="true" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
             <items>
-                <IconTabFilter icon="sap-icon://hint" key="info" text="Informationen">
+                <IconTabFilter icon="sap-icon://hint" key="info" text="{i18n>information}">
 
                     <content>
                         <form:Form width="100%" editable="false" visible="true">
@@ -126,9 +126,9 @@
                         </Table>
                     </content>
                 </IconTabFilter>
-                <IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
-                    <TextArea valueState="Information" placeholder="Notizen:" width="100%"/>
-                    <Button text="Speichern" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
+                <IconTabFilter icon="sap-icon://notes" key="notes" text="{i18n>notes}">
+                    <TextArea valueState="Information" placeholder="{i18n>notes}" width="100%"/>
+                    <Button text="{i18n>save}" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
                 </IconTabFilter>
             </items>
         </IconTabBar>
@@ -138,8 +138,25 @@
         <OverflowToolbar width="100%" height="auto" design="Auto" enabled="true" visible="true">
             <content>
                 <ToolbarSpacer width=""/>
-                <Button text="{i18n>accept}" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
-                <Button text="{i18n>decline}" type="Reject" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+                <Button 
+                    text="{i18n>accept}" 
+                    type="Accept" 
+                    iconFirst="true" 
+                    width="auto" 
+                    enabled="true" 
+                    visible="true" 
+                    iconDensityAware="false" 
+                    ariaHasPopup="Dialog"
+                    press="_onAcceptMessageBoxPress"/>
+                <Button 
+                    text="{i18n>decline}" 
+                    type="Reject" 
+                    iconFirst="true" 
+                    width="auto" 
+                    enabled="true" 
+                    visible="true" 
+                    iconDensityAware="false" 
+                    press="_onDeclineMessageBoxPress"/>
             </content>
         </OverflowToolbar>
     </footer>

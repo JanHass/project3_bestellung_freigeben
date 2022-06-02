@@ -11,6 +11,8 @@ sap.ui.define([
     // shortcut for sap.m.URLHelper
     var URLHelper = mobileLibrary.URLHelper;
 
+    var note;
+
     return BaseController.extend("odatatmp1.controller.Detail", {
 
         formatter: formatter,
@@ -28,6 +30,7 @@ sap.ui.define([
                 delay : 0,
                 lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
             });
+            
 
             this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
@@ -116,6 +119,10 @@ sap.ui.define([
             var oView = this.getView(),
                 oElementBinding = oView.getElementBinding();
 
+            //Delete Notes on View and var note    
+            note=""; 
+            this.getView().byId("notes").setValue("");   
+
             // No data for the binding
             if (!oElementBinding.getBoundContext()) {
                 this.getRouter().getTargets().display("detailObjectNotFound");
@@ -173,11 +180,7 @@ sap.ui.define([
                     {
                         
 
-                        var comment="current Comment insert here";
-                        var PONumber="PONumber";
-                        var postcall = "https://s4h.ososoft.de:44300/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV/Release?Comment='"+comment+"'&PONumber='"+PONumber+"'";
-                        
-                        MessageToast.show(postcall);
+                        MessageToast.show("OK"+note);
                     };
                 }
             });
@@ -190,16 +193,22 @@ sap.ui.define([
                     if(sButton === MessageBox.Action.OK)
                     {
                         
-
-                        var comment="current Comment insert here";
-                        var PONumber="PONumber";
-                        var postcall = "https://s4h.ososoft.de:44300/sap/opu/odata/SAP/ZOSO_PO_UTIL_SRV/Reject?PONumber='"+PONumber+"'&Comment='"+comment+"'";
                         
-                        MessageToast.show(postcall);
+                        
+                        MessageToast.show("OK"+note);
                     };
                 }
             });
 		},
+
+        _onButtonPressSaveNotes: function () {
+
+            note=this.getView().byId("notes").getValue();
+
+
+            MessageToast.show(note);
+
+        }
 
 
 

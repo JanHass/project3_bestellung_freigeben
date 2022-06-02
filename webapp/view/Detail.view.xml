@@ -127,8 +127,8 @@
                     </content>
                 </IconTabFilter>
                 <IconTabFilter icon="sap-icon://notes" key="notes" text="{i18n>notes}">
-                    <TextArea valueState="Information" placeholder="{i18n>notes}" width="100%"/>
-                    <Button text="{i18n>save}" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
+                    <TextArea id="notes" valueState="Information" placeholder="{i18n>notes}" width="100%" maxLength="256"  />
+                    <Button text="{i18n>save}" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPressSaveNotes"/>
                 </IconTabFilter>
             </items>
         </IconTabBar>

@@ -4,12 +4,22 @@
     <content>
         <layout:VerticalLayout width="100%" visible="true">
         <layout:content>
-            <ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
+            <ObjectHeader 
+            intro="" 
+            title="{Supplier}" 
+            icon="sap-icon://cart" 
+            number="{
+                    parts:[{path:'NetPriceAmount'}],
+                    type:'sap.ui.model.type.Currency',
+                    formatOptions: {showMeasure: false}
+                }">
                 <attributes>
                     <ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
                 </attributes>
+                
                 <statuses>
                     <ObjectStatus text="{OrderQuantity}"/>
+                    <ObjectStatus id="total" text="{path: 'to_PurchaseOrderItem', formatter: '.calcTotal'}"/>
                     <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
                     <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
                 </statuses>
@@ -32,7 +42,7 @@
                                                 <Label text="{i18n>order_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text id="PONo" text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:fields>
                                         </form:FormElement>
                                         <form:FormElement visible="true">

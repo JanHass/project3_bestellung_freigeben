@@ -121,7 +121,11 @@ sap.ui.define([
 
             //Delete Notes on View and var note    
             note=""; 
-            this.getView().byId("notes").setValue("");   
+            this.getView().byId("notes").setValue("");  
+            
+            this.getView().byId("total").setText(this.calcTotal());
+
+
 
             // No data for the binding
             if (!oElementBinding.getBoundContext()) {
@@ -186,16 +190,20 @@ sap.ui.define([
             });
 		},
         _onDeclineMessageBoxPress: function () {
+
+            
+            var oDataModel=this.getView().getModel("secondService");
+            var PONumber=this.getView().byId("PONo").getText();;
+            var Comment=note;
+                        
 			MessageBox.confirm("Decline purchase order 12345?", {
                 title: this.getView().getModel("i18n").getResourceBundle().getText("mbdecline"),
                 onClose : function(sButton) 
                 {
                     if(sButton === MessageBox.Action.OK)
                     {
-                        
-                        
-                        
-                        MessageToast.show("OK"+note);
+                        oDataModel.callFunction("/Reject",{method:"POST", urlParameters:{"PONumber":PONumber, "Comment":Comment}});
+                        MessageToast.show("OK "+note+" "+PONumber);
                     };
                 }
             });
@@ -208,7 +216,26 @@ sap.ui.define([
 
             MessageToast.show(note);
 
+        },
+
+        calcTotal: function () {
+            var oDataModel=this.getView().getModel();
+            var items=oDataModel.getProperty("/to_PurchaseOrderItem/1/NetPriceAmount");
+            
+            if (!items)
+            {
+                MessageToast.show("Keine Items");
+                return;
+            }
+            else
+            {
+                MessageToast.show("Items vorhanden");
+                
+                
+            }
         }
+
+        
 
 
 

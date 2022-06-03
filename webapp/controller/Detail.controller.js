@@ -176,15 +176,35 @@ sap.ui.define([
         
 
         _onAcceptMessageBoxPress: function () {
-			MessageBox.confirm("Approve purchase order 12345?", {
-                title: this.getView().getModel("i18n").getResourceBundle().getText("mbconfirm"),
+
+            var oDataModel=this.getView().getModel("secondService");
+            var PONumber=this.getView().byId("PONo").getText();;
+            var Comment=note;
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successaccept");
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorAccept");
+
+			MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("mbconfirmlong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
                 onClose : function(sButton) 
                 {
                     if(sButton === MessageBox.Action.OK)
                     {
-                        
-
-                        MessageToast.show("OK"+note);
+                        oDataModel.callFunction("/Reject", {
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                                 
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
                     };
                 }
             });
@@ -195,15 +215,32 @@ sap.ui.define([
             var oDataModel=this.getView().getModel("secondService");
             var PONumber=this.getView().byId("PONo").getText();;
             var Comment=note;
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successdecline");
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorDecline");
                         
-			MessageBox.confirm("Decline purchase order 12345?", {
-                title: this.getView().getModel("i18n").getResourceBundle().getText("mbdecline"),
+			MessageBox.confirm (this.getView().getModel("i18n").getResourceBundle().getText("mbdeclinelong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
                 onClose : function(sButton) 
                 {
                     if(sButton === MessageBox.Action.OK)
                     {
-                        oDataModel.callFunction("/Reject",{method:"POST", urlParameters:{"PONumber":PONumber, "Comment":Comment}});
-                        MessageToast.show("OK "+note+" "+PONumber);
+                        oDataModel.callFunction("/Reject", {
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
+                        
+                        
                     };
                 }
             });

@@ -65,6 +65,7 @@ sap.ui.define([
                     sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
                 }
                 oViewModel.setProperty("/lineItemListTitle", sTitle);
+                this.calcTotal();
             }
         },
 
@@ -130,7 +131,7 @@ sap.ui.define([
             note=""; 
             this.getView().byId("notes").setValue("");  
             
-            this.calcTotal();
+            
 
             
 
@@ -202,10 +203,8 @@ sap.ui.define([
 
                     subtotal=items[i].getCells()[4].getText();
                     subtotal=parseFloat(subtotal)
-                    console.log(subtotal);
                     result += subtotal;
-                    console.log(result);
-                    
+
                     
                 }
             

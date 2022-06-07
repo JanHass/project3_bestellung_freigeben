@@ -12,6 +12,7 @@ sap.ui.define([
     var URLHelper = mobileLibrary.URLHelper;
 
     var note;
+    
 
     return BaseController.extend("odatatmp1.controller.Detail", {
 
@@ -37,6 +38,8 @@ sap.ui.define([
             this.setModel(oViewModel, "detailView");
 
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+
+            
         },
 
         
@@ -84,6 +87,10 @@ sap.ui.define([
                 });
                 this._bindView("/" + sObjectPath);
             }.bind(this));
+
+            
+
+
         },
 
         /**
@@ -123,7 +130,9 @@ sap.ui.define([
             note=""; 
             this.getView().byId("notes").setValue("");  
             
-            this.getView().byId("total").setText(this.calcTotal());
+            this.calcTotal();
+
+            
 
 
 
@@ -143,7 +152,13 @@ sap.ui.define([
                 sObjectName = oObject.PurchaseOrder,
                 oViewModel = this.getModel("detailView");
 
+            
+
+
             this.getOwnerComponent().oListSelector.selectAListItem(sPath);
+
+            
+            
 
             
         },
@@ -169,7 +184,55 @@ sap.ui.define([
             oViewModel.setProperty("/busy", true);
             // Restore original busy indicator delay for the detail view
             oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
+
+            
+            
         },
+
+        calcTotal: function () {
+
+			var result = 0.0;
+            var subtotal= 0.0;
+
+            var items = this.getView().byId('lineItemsList').getItems();
+
+            
+                for (var i=0; i<items.length;i++) {
+
+
+                    subtotal=items[i].getCells()[4].getText();
+                    subtotal=parseFloat(subtotal)
+                    console.log(subtotal);
+                    result += subtotal;
+                    console.log(result);
+                    
+                    
+                }
+            
+
+            
+
+    
+
+			result = result.toFixed(2);
+            this.getView().byId("total").setText(result);
+            
+
+            //MessageToast.show("Total amount");
+		},
+
+        calcSubTotal: function (NetPriceAmount, OrderQuantity) {
+            var subtotal= 0.0;
+
+			NetPriceAmount=parseFloat(NetPriceAmount);
+            OrderQuantity=parseFloat(OrderQuantity);
+
+            subtotal=NetPriceAmount*OrderQuantity;
+            subtotal=subtotal.toFixed(2);
+
+            
+            return(subtotal);
+		},
 
         
 
@@ -254,23 +317,7 @@ sap.ui.define([
             MessageToast.show(note);
 
         },
-
-        calcTotal: function () {
-            var oDataModel=this.getView().getModel();
-            var items=oDataModel.getProperty("/to_PurchaseOrderItem/1/NetPriceAmount");
-            
-            if (!items)
-            {
-                MessageToast.show("Keine Items");
-                return;
-            }
-            else
-            {
-                MessageToast.show("Items vorhanden");
-                
-                
-            }
-        }
+        
 
         
 

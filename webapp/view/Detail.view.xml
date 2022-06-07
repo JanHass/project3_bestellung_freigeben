@@ -19,7 +19,9 @@
                 
                 <statuses>
                     <ObjectStatus text="{OrderQuantity}"/>
-                    <ObjectStatus id="total" text="{path: 'to_PurchaseOrderItem', formatter: '.calcTotal'}"/>
+                    <ObjectStatus id="total" text="TEMP"/>
+                    
+                     <!-- <ObjectStatus id="total" text="{path: 'to_PurchaseOrderItem' , formatter: '.calcTotal'}"/> -->
                     <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
                     <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
                 </statuses>
@@ -115,7 +117,7 @@
                                     </header>
                                     <footer/>
                                 </Column>
-                                <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <Column id="subtotal" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
                                         <Text text="{i18n>subtotal}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
@@ -129,7 +131,11 @@
                                         <Text  text="{PurchaseOrderItemText}"/>
                                         <Text  text="{OrderQuantity}"/>
                                         <Text  text="{NetPriceAmount}"/>
-                                        <Text text="{= ${OrderQuantity}*${NetPriceAmount}}"/>
+                                        <!-- <Text  text="{= ${OrderQuantity}*${NetPriceAmount}}"/> -->
+                                        <!-- <Text  text="{path: 'NetPriceAmount', 'OrderQuantity', formatter: '.calcSubTotal'}"/> -->
+                                        <Text text="{parts: [{path: 'NetPriceAmount'}, {path: 'OrderQuantity'}], formatter: '.calcSubTotal'}"/>
+                                        
+                                        
                                     </cells>
                                 </ColumnListItem>
                             </items>

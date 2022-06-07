@@ -2,12 +2,17 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
-    "sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+    "sap/m/library",
+    "sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageBox, MessageToast) {
     "use strict";
 
     // shortcut for sap.m.URLHelper
     var URLHelper = mobileLibrary.URLHelper;
+
+    var note;
+    
 
     return BaseController.extend("odatatmp1.controller.Detail", {
 
@@ -26,31 +31,19 @@ sap.ui.define([
                 delay : 0,
                 lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
             });
+            
 
             this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
             this.setModel(oViewModel, "detailView");
 
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+
+            
         },
 
-        /* =========================================================== */
-        /* event handlers                                              */
-        /* =========================================================== */
-
-        /**
-         * Event handler when the share by E-Mail button has been clicked
-         * @public
-         */
-        onSendEmailPress: function () {
-            var oViewModel = this.getModel("detailView");
-
-            URLHelper.triggerEmail(
-                null,
-                oViewModel.getProperty("/shareSendEmailSubject"),
-                oViewModel.getProperty("/shareSendEmailMessage")
-            );
-        },
+        
+        
 
         
         /**
@@ -72,6 +65,7 @@ sap.ui.define([
                     sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
                 }
                 oViewModel.setProperty("/lineItemListTitle", sTitle);
+                this.calcTotal();
             }
         },
 
@@ -94,6 +88,10 @@ sap.ui.define([
                 });
                 this._bindView("/" + sObjectPath);
             }.bind(this));
+
+            
+
+
         },
 
         /**
@@ -106,6 +104,7 @@ sap.ui.define([
         _bindView: function (sObjectPath) {
             // Set busy indicator during view binding
             var oViewModel = this.getModel("detailView");
+            
 
             // If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
             oViewModel.setProperty("/busy", false);
@@ -128,6 +127,16 @@ sap.ui.define([
             var oView = this.getView(),
                 oElementBinding = oView.getElementBinding();
 
+            //Delete Notes on View and var note    
+            note=""; 
+            this.getView().byId("notes").setValue("");  
+            
+            
+
+            
+
+
+
             // No data for the binding
             if (!oElementBinding.getBoundContext()) {
                 this.getRouter().getTargets().display("detailObjectNotFound");
@@ -144,12 +153,15 @@ sap.ui.define([
                 sObjectName = oObject.PurchaseOrder,
                 oViewModel = this.getModel("detailView");
 
+            
+
+
             this.getOwnerComponent().oListSelector.selectAListItem(sPath);
 
-            oViewModel.setProperty("/shareSendEmailSubject",
-                oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-            oViewModel.setProperty("/shareSendEmailMessage",
-                oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+            
+            
+
+            
         },
 
         _onMetadataLoaded: function () {
@@ -173,33 +185,143 @@ sap.ui.define([
             oViewModel.setProperty("/busy", true);
             // Restore original busy indicator delay for the detail view
             oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
+
+            
+            
         },
 
-        /**
-         * Set the full screen mode to false and navigate to list page
-         */
-        onCloseDetailPress: function () {
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
-            // No item should be selected on list after detail page is closed
-            this.getOwnerComponent().oListSelector.clearListListSelection();
-            this.getRouter().navTo("list");
-        },
+        calcTotal: function () {
 
-        /**
-         * Toggle between full and non full screen mode.
-         */
-        toggleFullScreen: function () {
-            var bFullScreen = this.getModel("appView").getProperty("/actionButtonsInfo/midColumn/fullScreen");
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", !bFullScreen);
-            if (!bFullScreen) {
-                // store current layout and go full screen
-                this.getModel("appView").setProperty("/previousLayout", this.getModel("appView").getProperty("/layout"));
-                this.getModel("appView").setProperty("/layout", "MidColumnFullScreen");
-            } else {
-                // reset to previous layout
-                this.getModel("appView").setProperty("/layout",  this.getModel("appView").getProperty("/previousLayout"));
-            }
-        }
+			var result = 0.0;
+            var subtotal= 0.0;
+
+            var items = this.getView().byId('lineItemsList').getItems();
+
+            
+                for (var i=0; i<items.length;i++) {
+
+
+                    subtotal=items[i].getCells()[4].getText();
+                    subtotal=parseFloat(subtotal)
+                    result += subtotal;
+
+                    
+                }
+            
+
+            
+
+    
+
+			result = result.toFixed(2);
+            this.getView().byId("total").setText(result);
+            
+
+            //MessageToast.show("Total amount");
+		},
+
+        calcSubTotal: function (NetPriceAmount, OrderQuantity) {
+            var subtotal= 0.0;
+
+			NetPriceAmount=parseFloat(NetPriceAmount);
+            OrderQuantity=parseFloat(OrderQuantity);
+
+            subtotal=NetPriceAmount*OrderQuantity;
+            subtotal=subtotal.toFixed(2);
+
+            
+            return(subtotal);
+		},
+
+        
+
+        
+
+        _onAcceptMessageBoxPress: function () {
+
+            var oDataModel=this.getView().getModel("secondService");
+            var PONumber=this.getView().byId("PONo").getText();;
+            var Comment=note;
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successaccept");
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorAccept");
+
+			MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("mbconfirmlong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK)
+                    {
+                        oDataModel.callFunction("/Reject", {
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                                 
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
+                    };
+                }
+            });
+		},
+        _onDeclineMessageBoxPress: function () {
+
+            
+            var oDataModel=this.getView().getModel("secondService");
+            var PONumber=this.getView().byId("PONo").getText();;
+            var Comment=note;
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successdecline");
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorDecline");
+                        
+			MessageBox.confirm (this.getView().getModel("i18n").getResourceBundle().getText("mbdeclinelong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK)
+                    {
+                        oDataModel.callFunction("/Reject", {
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
+                        
+                        
+                    };
+                }
+            });
+		},
+
+        _onButtonPressSaveNotes: function () {
+
+            note=this.getView().byId("notes").getValue();
+
+
+            MessageToast.show(note);
+
+        },
+        
+
+        
+
+
+
     });
 
 });

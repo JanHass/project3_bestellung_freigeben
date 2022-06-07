@@ -4,9 +4,6 @@
 <layout:VerticalLayout width="100%" visible="true">
 <layout:content>
 <ObjectHeader intro="" title="{Supplier}" icon="sap-icon://cart">
-<attributes>
-<ObjectAttribute text="{CreatedByName}" active="true" visible="true" press="_onObjectAttributePress"/>
-</attributes>
 <statuses>
 <ObjectStatus text="{OrderQuantity}"/>
 <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
@@ -27,7 +24,7 @@
 <form:formElements>
 <form:FormElement visible="true">
 <form:label>
-<Label text="Bestellnummer" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Bestellnummer" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
 </form:label>
 <form:fields>
 <Text text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -35,7 +32,7 @@
 </form:FormElement>
 <form:FormElement visible="true">
 <form:label>
-<Label text="Lieferantenname" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Lieferantenname" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
 </form:label>
 <form:fields>
 <Text text="{AddressName}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -43,7 +40,7 @@
 </form:FormElement>
 <form:FormElement visible="true">
 <form:label>
-<Label text="Zahlungsbedingungen" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Zahlungsbedingungen" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
 </form:label>
 <form:fields>
 <Text text="{CashDiscount1Days} Tage {CashDiscount1Percent}%, {CashDiscount2Days} Tage {CashDiscount2Percent}%,{NetPaymentDays} net "  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -81,31 +78,31 @@
 <columns>
 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
 <header>
-<Text text="Positon" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Positon" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" design="Bold"/>
 </header>
 <footer/>
 </Column>
 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 <header>
-<Text text="Produktname" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Produktname" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" design="Bold"/>
 </header>
 <footer/>
 </Column>
 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 <header>
-<Text text="Anzahl" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Anzahl" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" design="Bold"/>
 </header>
 <footer/>
 </Column>
 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 <header>
-<Text text="Stückpreis" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text= "Stückpreis" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" design="Bold"/>
 </header>
 <footer/>
 </Column>
 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
 <header>
-<Text text="Zwischensumme" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+<Label text="Zwischensumme" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" design="Bold"/>
 </header>
 <footer/>
 </Column>
@@ -116,8 +113,8 @@
 <Text  text="{PurchaseOrderItem}"/>
 <Text  text="{PurchaseOrderItemText}"/>
 <Text  text="{OrderQuantity}"/>
-<Text  text="{NetPriceAmount}"/>
-<Text text="{= ${OrderQuantity}*${NetPriceAmount}}"/>
+<Text  text="{NetPriceAmount} {DocumentCurrency}"/>
+<Text text="{= ${OrderQuantity}*${NetPriceAmount}} {DocumentCurrency}"/>
 </cells>
 </ColumnListItem>
 </items>
@@ -125,8 +122,9 @@
 </content>
 </IconTabFilter>
 <IconTabFilter icon="sap-icon://notes" key="notes" text="Notizen">
-				<Text text="Notes go here ..." />
-			</IconTabFilter>
+<TextArea valueState="Information" placeholder="Notizen:" width="100%"/>
+<Button text="Speichern" type="Ghost" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress2"/>
+</IconTabFilter>
 </items>
 </IconTabBar>
 <form:ResponsiveGridLayout columnsM="1" columnsL="2" emptySpanL="0" emptySpanM="0" emptySpanS="0" visible="true" labelSpanS="12" labelSpanM="2" labelSpanL="4"/>

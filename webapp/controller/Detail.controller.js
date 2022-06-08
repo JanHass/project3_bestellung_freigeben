@@ -2,12 +2,17 @@ sap.ui.define([
     "./BaseController",
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
-    "sap/m/library"
-], function (BaseController, JSONModel, formatter, mobileLibrary) {
+    "sap/m/library",
+    "sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (BaseController, JSONModel, formatter, mobileLibrary, MessageBox, MessageToast) {
     "use strict";
 
     // shortcut for sap.m.URLHelper
     var URLHelper = mobileLibrary.URLHelper;
+
+    var note;
+    
 
     return BaseController.extend("odatatmp1.controller.Detail", {
 
@@ -26,31 +31,19 @@ sap.ui.define([
                 delay : 0,
                 lineItemListTitle : this.getResourceBundle().getText("detailLineItemTableHeading")
             });
+            
 
             this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
             this.setModel(oViewModel, "detailView");
 
             this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+
+            
         },
 
-        /* =========================================================== */
-        /* event handlers                                              */
-        /* =========================================================== */
-
-        /**
-         * Event handler when the share by E-Mail button has been clicked
-         * @public
-         */
-        onSendEmailPress: function () {
-            var oViewModel = this.getModel("detailView");
-
-            URLHelper.triggerEmail(
-                null,
-                oViewModel.getProperty("/shareSendEmailSubject"),
-                oViewModel.getProperty("/shareSendEmailMessage")
-            );
-        },
+        
+        
 
         
         /**
@@ -58,6 +51,8 @@ sap.ui.define([
          * @param {object} oEvent an event containing the total number of items in the list
          * @private
          */
+
+        //Wenn die Bestellung in der View fertig geladen ist
         onListUpdateFinished: function (oEvent) {
             var sTitle,
                 iTotalItems = oEvent.getParameter("total"),
@@ -72,6 +67,7 @@ sap.ui.define([
                     sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
                 }
                 oViewModel.setProperty("/lineItemListTitle", sTitle);
+                this.calcTotal(); //Gesamtpreis ermitteln
             }
         },
 
@@ -94,6 +90,10 @@ sap.ui.define([
                 });
                 this._bindView("/" + sObjectPath);
             }.bind(this));
+
+            
+
+
         },
 
         /**
@@ -106,6 +106,7 @@ sap.ui.define([
         _bindView: function (sObjectPath) {
             // Set busy indicator during view binding
             var oViewModel = this.getModel("detailView");
+            
 
             // If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
             oViewModel.setProperty("/busy", false);
@@ -123,10 +124,15 @@ sap.ui.define([
                 }
             });
         },
-
+        //Wen eine andere Bestellung aus der Liste gewählt wird.
         _onBindingChange: function () {
             var oView = this.getView(),
                 oElementBinding = oView.getElementBinding();
+
+            //Delete Notes on View and var note    
+            note=""; 
+            this.getView().byId("notes").setValue("");  
+            
 
             // No data for the binding
             if (!oElementBinding.getBoundContext()) {
@@ -144,12 +150,15 @@ sap.ui.define([
                 sObjectName = oObject.PurchaseOrder,
                 oViewModel = this.getModel("detailView");
 
+            
+
+
             this.getOwnerComponent().oListSelector.selectAListItem(sPath);
 
-            oViewModel.setProperty("/shareSendEmailSubject",
-                oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-            oViewModel.setProperty("/shareSendEmailMessage",
-                oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+            
+            
+
+            
         },
 
         _onMetadataLoaded: function () {
@@ -173,33 +182,143 @@ sap.ui.define([
             oViewModel.setProperty("/busy", true);
             // Restore original busy indicator delay for the detail view
             oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
-        },
 
-        /**
-         * Set the full screen mode to false and navigate to list page
-         */
-        onCloseDetailPress: function () {
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
-            // No item should be selected on list after detail page is closed
-            this.getOwnerComponent().oListSelector.clearListListSelection();
-            this.getRouter().navTo("list");
+            
+            
         },
+        //Gesamtpreis errechnen
+        calcTotal: function () {
 
-        /**
-         * Toggle between full and non full screen mode.
-         */
-        toggleFullScreen: function () {
-            var bFullScreen = this.getModel("appView").getProperty("/actionButtonsInfo/midColumn/fullScreen");
-            this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", !bFullScreen);
-            if (!bFullScreen) {
-                // store current layout and go full screen
-                this.getModel("appView").setProperty("/previousLayout", this.getModel("appView").getProperty("/layout"));
-                this.getModel("appView").setProperty("/layout", "MidColumnFullScreen");
-            } else {
-                // reset to previous layout
-                this.getModel("appView").setProperty("/layout",  this.getModel("appView").getProperty("/previousLayout"));
-            }
-        }
+			var result = 0.0;
+            var subtotal= 0.0;
+
+            //Tabelle mit allen Positionen lesen und in einen Array speichern
+            var items = this.getView().byId('lineItemsList').getItems();
+
+                
+                for (var i=0; i<items.length;i++) {
+
+                    
+                    subtotal=items[i].getCells()[4].getText();  //Cells 4 = Subtotal = Anzahl der Produkte * Preis/Produkt
+                    subtotal=parseFloat(subtotal)               //subtotal in float umwandeln
+                    result += subtotal;                         //subtotal auf result (total) addieren
+
+                    
+                }
+            
+
+			result = result.toFixed(2);                         // reuslt auf 2 NK Stellen runden
+            this.getView().byId("total").setText(result);       // Textfeld text "total" zu result ändern
+            
+
+            //MessageToast.show("Total amount");
+		},
+
+        //Zwischensumme errechnen (Tabelle)
+        //Beim Aufruf wird die Anzahl der Produkte und der Preis/St einer Position übergeben
+        calcSubTotal: function (NetPriceAmount, OrderQuantity) {
+            var subtotal= 0.0;
+
+			NetPriceAmount=parseFloat(NetPriceAmount);  //Übergebener Wert in Float umwandeln
+            OrderQuantity=parseFloat(OrderQuantity);    //Übergebener Wert in Float umwandeln
+
+            subtotal=NetPriceAmount*OrderQuantity;      //Berechnung
+            subtotal=subtotal.toFixed(2);               //subtotal auf 2 NK Stellen runden
+
+            
+            return(subtotal);                           //subtotal zurückgeben
+		},
+
+        
+
+        
+        //Bestellung annehmen
+        _onAcceptMessageBoxPress: function () {
+
+            var oDataModel=this.getView().getModel("secondService");    
+            var PONumber=this.getView().byId("PONo").getText(); //Order Number lesen
+            var Comment=note;   //note -> siehe "_onButtonPressSaveNotes"
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successaccept"); //Aufruf um an Übersetzung zu kommen
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorAccept");
+
+			MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("mbconfirmlong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK) //Wenn im PopUp der OK Button betätigt wird
+                    {
+                        oDataModel.callFunction("/Reject", {
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                                 
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
+                    };
+                }
+            });
+		},
+        //Bestellung ablehnen
+        _onDeclineMessageBoxPress: function () {
+
+            
+            var oDataModel=this.getView().getModel("secondService");
+            var PONumber=this.getView().byId("PONo").getText(); //Order Number lesen
+            var Comment=note;
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successdecline");
+            var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorDecline");
+                        
+			MessageBox.confirm (this.getView().getModel("i18n").getResourceBundle().getText("mbdeclinelong"), {
+                title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
+                onClose : function(sButton) 
+                {
+                    if(sButton === MessageBox.Action.OK) //Wenn im PopUp der OK Button betätigt wird
+                    {
+                        oDataModel.callFunction("/Reject", { //OData Function ausführen
+                            "method": "POST",
+                            urlParameters: {
+                                "PONumber":PONumber, 
+                                "Comment":Comment
+                            },
+                            success: function(oData, oResponse){
+                                 //Handle Success
+                                 MessageToast.show(successmessage);
+                            },
+                            error: function(oError){
+                                 //Handle Error
+                                 MessageToast.show(errormessage);
+                            }
+                       });
+                        
+                        
+                    };
+                }
+            });
+		},
+        //Notiz speichern
+        _onButtonPressSaveNotes: function () {
+
+            note=this.getView().byId("notes").getValue(); //Wenn Button betätigt, wird die geschriebene Notiz (View) in der Controller Variable "note" gespeichert
+
+
+            MessageToast.show(note);
+
+        },
+        
+
+        
+
+
+
     });
 
 });

@@ -51,6 +51,8 @@ sap.ui.define([
          * @param {object} oEvent an event containing the total number of items in the list
          * @private
          */
+
+        //Wenn die Bestellung in der View fertig geladen ist
         onListUpdateFinished: function (oEvent) {
             var sTitle,
                 iTotalItems = oEvent.getParameter("total"),
@@ -65,7 +67,7 @@ sap.ui.define([
                     sTitle = this.getResourceBundle().getText("detailLineItemTableHeading");
                 }
                 oViewModel.setProperty("/lineItemListTitle", sTitle);
-                this.calcTotal();
+                this.calcTotal(); //Gesamtpreis ermitteln
             }
         },
 
@@ -122,7 +124,7 @@ sap.ui.define([
                 }
             });
         },
-
+        //Wen eine andere Bestellung aus der Liste gewählt wird.
         _onBindingChange: function () {
             var oView = this.getView(),
                 oElementBinding = oView.getElementBinding();
@@ -131,11 +133,6 @@ sap.ui.define([
             note=""; 
             this.getView().byId("notes").setValue("");  
             
-            
-
-            
-
-
 
             // No data for the binding
             if (!oElementBinding.getBoundContext()) {
@@ -189,67 +186,66 @@ sap.ui.define([
             
             
         },
-
+        //Gesamtpreis errechnen
         calcTotal: function () {
 
 			var result = 0.0;
             var subtotal= 0.0;
 
+            //Tabelle mit allen Positionen lesen und in einen Array speichern
             var items = this.getView().byId('lineItemsList').getItems();
 
-            
+                
                 for (var i=0; i<items.length;i++) {
 
-
-                    subtotal=items[i].getCells()[4].getText();
-                    subtotal=parseFloat(subtotal)
-                    result += subtotal;
+                    
+                    subtotal=items[i].getCells()[4].getText();  //Cells 4 = Subtotal = Anzahl der Produkte * Preis/Produkt
+                    subtotal=parseFloat(subtotal)               //subtotal in float umwandeln
+                    result += subtotal;                         //subtotal auf result (total) addieren
 
                     
                 }
             
 
-            
-
-    
-
-			result = result.toFixed(2);
-            this.getView().byId("total").setText(result);
+			result = result.toFixed(2);                         // reuslt auf 2 NK Stellen runden
+            this.getView().byId("total").setText(result);       // Textfeld text "total" zu result ändern
             
 
             //MessageToast.show("Total amount");
 		},
 
+        //Zwischensumme errechnen (Tabelle)
+        //Beim Aufruf wird die Anzahl der Produkte und der Preis/St einer Position übergeben
         calcSubTotal: function (NetPriceAmount, OrderQuantity) {
             var subtotal= 0.0;
 
-			NetPriceAmount=parseFloat(NetPriceAmount);
-            OrderQuantity=parseFloat(OrderQuantity);
+			NetPriceAmount=parseFloat(NetPriceAmount);  //Übergebener Wert in Float umwandeln
+            OrderQuantity=parseFloat(OrderQuantity);    //Übergebener Wert in Float umwandeln
 
-            subtotal=NetPriceAmount*OrderQuantity;
-            subtotal=subtotal.toFixed(2);
+            subtotal=NetPriceAmount*OrderQuantity;      //Berechnung
+            subtotal=subtotal.toFixed(2);               //subtotal auf 2 NK Stellen runden
 
             
-            return(subtotal);
+            return(subtotal);                           //subtotal zurückgeben
 		},
 
         
 
         
-
+        //Bestellung annehmen
         _onAcceptMessageBoxPress: function () {
 
-            var oDataModel=this.getView().getModel("secondService");
-            var PONumber=this.getView().byId("PONo").getText();;
-            var Comment=note;
-            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successaccept");
+            var oDataModel=this.getView().getModel("secondService");    
+            var PONumber=this.getView().byId("PONo").getText(); //Order Number lesen
+            var Comment=note;   //note -> siehe "_onButtonPressSaveNotes"
+            var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successaccept"); //Aufruf um an Übersetzung zu kommen
             var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorAccept");
 
 			MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("mbconfirmlong"), {
                 title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
                 onClose : function(sButton) 
                 {
-                    if(sButton === MessageBox.Action.OK)
+                    if(sButton === MessageBox.Action.OK) //Wenn im PopUp der OK Button betätigt wird
                     {
                         oDataModel.callFunction("/Reject", {
                             "method": "POST",
@@ -271,11 +267,12 @@ sap.ui.define([
                 }
             });
 		},
+        //Bestellung ablehnen
         _onDeclineMessageBoxPress: function () {
 
             
             var oDataModel=this.getView().getModel("secondService");
-            var PONumber=this.getView().byId("PONo").getText();;
+            var PONumber=this.getView().byId("PONo").getText(); //Order Number lesen
             var Comment=note;
             var successmessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("successdecline");
             var errormessage= this.getView().getModel("i18n").getResourceBundle().getText("order") +" "+ PONumber+" "+this.getView().getModel("i18n").getResourceBundle().getText("errorDecline");
@@ -284,9 +281,9 @@ sap.ui.define([
                 title: this.getView().getModel("i18n").getResourceBundle().getText("mborder") +" "+ PONumber,
                 onClose : function(sButton) 
                 {
-                    if(sButton === MessageBox.Action.OK)
+                    if(sButton === MessageBox.Action.OK) //Wenn im PopUp der OK Button betätigt wird
                     {
-                        oDataModel.callFunction("/Reject", {
+                        oDataModel.callFunction("/Reject", { //OData Function ausführen
                             "method": "POST",
                             urlParameters: {
                                 "PONumber":PONumber, 
@@ -307,10 +304,10 @@ sap.ui.define([
                 }
             });
 		},
-
+        //Notiz speichern
         _onButtonPressSaveNotes: function () {
 
-            note=this.getView().byId("notes").getValue();
+            note=this.getView().byId("notes").getValue(); //Wenn Button betätigt, wird die geschriebene Notiz (View) in der Controller Variable "note" gespeichert
 
 
             MessageToast.show(note);

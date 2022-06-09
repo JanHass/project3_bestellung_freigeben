@@ -89,7 +89,8 @@ sap.ui.define([
 			if (sQuery && sQuery.length > 0) {
                 var filterSupplier = new Filter("Supplier", FilterOperator.Contains, sQuery);
 				var filterPurchaseOrder = new Filter("PurchaseOrder", FilterOperator.Contains, sQuery);
-                var aFilters = new Filter({filters:[filterSupplier,filterPurchaseOrder],and: false});
+                var filterCreatedByUser = new Filter("CreatedByUser", FilterOperator.Contains, sQuery);
+                var aFilters = new Filter({filters:[filterSupplier,filterPurchaseOrder,filterCreatedByUser],and: false});
             }
             
             

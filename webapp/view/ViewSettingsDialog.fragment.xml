@@ -18,9 +18,10 @@
                 text="{i18n>listSortPurchaseOrderDate}"
                 key="PurchaseOrderDate"
                 selected="true"/>
+            
             <ViewSettingsItem
-                text="{i18n>listSortCompanyCode}"
-                key="CompanyCode"
+                text="{i18n>listSortCreatedByUser}"
+                key="CreatedByUser"
                 selected="true"/>        
 
         </sortItems>

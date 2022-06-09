@@ -67,8 +67,7 @@
                         type="Navigation"
                         press=".onSelectionChange"
                         title="{Supplier}"
-                        number="{path: 'CompanyCode', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2, decimals: 2 }}" 
-                        numberUnit="{DocumentCurrency}" 
+                        
                         numberState="None" 
                 
                     >
@@ -79,8 +78,9 @@
                             <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
                         </firstStatus>
                         <secondStatus>
-                            <ObjectStatus text=""/>                       
+                            <ObjectStatus text="{CreatedByUser}"/>                       
                         </secondStatus>
+                        
                     </ObjectListItem>
                 </items>
             </List>

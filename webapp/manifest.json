@@ -3,11 +3,7 @@
   "sap.app": {
     "id": "odatatmp1",
     "type": "application",
-    "i18n": {
-      "bundleName": "odatatmp1.i18n.i18n",
-      "supportedLocales": ["de", "en"],
-      "fallbackLocale": "en"
-    },
+    "i18n": "i18n/i18n.properties",
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -74,9 +70,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "odatatmp1.i18n.i18n",
-          "supportedLocales": ["de", "en"],
-          "fallbackLocale": "en"
+          "bundleName": "odatatmp1.i18n.i18n"
         }
       },
       "": {

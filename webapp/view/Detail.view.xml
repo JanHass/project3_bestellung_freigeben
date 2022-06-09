@@ -18,11 +18,10 @@
                 </attributes>
                 
                 <statuses>
-                    <ObjectStatus text="{OrderQuantity}"/>
-                    <ObjectStatus id="total" text="TEMP"/>
-                    
+                    <ObjectStatus text="{OrderQuantity}" />
+                    <ObjectStatus id="total" class="sapMObjectStatusLarge" mtext="TEMP"/>
                      <!-- <ObjectStatus id="total" text="{path: 'to_PurchaseOrderItem' , formatter: '.calcTotal'}"/> -->
-                    <ObjectStatus text="{DocumentCurrency}" state="None" visible="true"/>
+                    <ObjectStatus class="sapMObjectStatusLarge" text="{DocumentCurrency}" state="None" visible="true"/>
                     <ObjectStatus text="{path: 'PurchaseOrderDate', type: 'sap.ui.model.type.DateTime',formatOptions: { pattern: 'dd.MM.yyyy'}}" state="None" visible="true"/>
                 </statuses>
                 <markers/>
@@ -41,7 +40,7 @@
                                     <form:formElements>
                                         <form:FormElement visible="true">
                                             <form:label>
-                                                <Label text="{i18n>order_no}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Label text="{i18n>order_no}" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
                                             </form:label>
                                             <form:fields>
                                                 <Text id="PONo" text="{PurchaseOrder}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -49,7 +48,7 @@
                                         </form:FormElement>
                                         <form:FormElement visible="true">
                                             <form:label>
-                                                <Label text="{i18n>supplier_name}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Label text="{i18n>supplier_name}" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
                                                 <Text text="{AddressName}" width="auto" maxLines="2" wrapping="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
@@ -57,10 +56,10 @@
                                         </form:FormElement>
                                         <form:FormElement visible="true">
                                             <form:label>
-                                                <Label text="{i18n>payment_terms}" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Label text="{i18n>payment_terms}" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:label>
                                             <form:fields>
-                                                <Text text="{CashDiscount1Days} {i18n>days} {CashDiscount1Percent}%, {CashDiscount2Days} {i18n>days} {CashDiscount2Percent}%,{NetPaymentDays} net "  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                <Text text="{CashDiscount1Days} {i18n>days}  {CashDiscount1Percent}%, {CashDiscount2Days} {i18n>days} {CashDiscount2Percent}%,{NetPaymentDays} net "  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                             </form:fields>
                                         </form:FormElement>
                                     </form:formElements>
@@ -95,31 +94,31 @@
                             <columns>
                                 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="{i18n>position}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <ObjectStatus class="sapUiSmallMarginBottom" text="{i18n>position}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" state="Indication05"/>
                                     </header>
                                     <footer/>
                                 </Column>
                                 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="{i18n>product_name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <ObjectStatus class="sapUiSmallMarginBottom" state="Indication05" text="{i18n>product_name}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
                                     <footer/>
                                 </Column>
                                 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="{i18n>quantity}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <ObjectStatus class="sapUiSmallMarginBottom" state="Indication05" text="{i18n>quantity}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
                                     <footer/>
                                 </Column>
                                 <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="{i18n>unit_price}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <ObjectStatus class="sapUiSmallMarginBottom" state="Indication05" text="{i18n>unit_price}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
                                     <footer/>
                                 </Column>
                                 <Column id="subtotal" width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                                     <header>
-                                        <Text text="{i18n>subtotal}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        <ObjectStatus class="sapUiSmallMarginBottom" state="Indication05" text="{i18n>subtotal}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                     </header>
                                     <footer/>
                                 </Column>
@@ -130,10 +129,10 @@
                                         <Text  text="{PurchaseOrderItem}"/>
                                         <Text  text="{PurchaseOrderItemText}"/>
                                         <Text  text="{OrderQuantity}"/>
-                                        <Text  text="{NetPriceAmount}"/>
+                                        <Text  text="{NetPriceAmount} {DocumentCurrency}"/>
                                         <!-- <Text  text="{= ${OrderQuantity}*${NetPriceAmount}}"/> -->
                                         <!-- <Text  text="{path: 'NetPriceAmount', 'OrderQuantity', formatter: '.calcSubTotal'}"/> -->
-                                        <Text text="{parts: [{path: 'NetPriceAmount'}, {path: 'OrderQuantity'}], formatter: '.calcSubTotal'}"/>
+                                        <Text text="{parts: [{path: 'NetPriceAmount'}, {path: 'OrderQuantity'}], formatter: '.calcSubTotal'} {DocumentCurrency}"/>
                                         
                                         
                                     </cells>

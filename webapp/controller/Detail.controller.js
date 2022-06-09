@@ -18,14 +18,9 @@ sap.ui.define([
 
         formatter: formatter,
 
-        /* =========================================================== */
-        /* lifecycle methods                                           */
-        /* =========================================================== */
+       
 
         onInit: function () {
-            // Model used to manipulate control states. The chosen values make sure,
-            // detail page is busy indication immediately so there is no break in
-            // between the busy indication for loading the view's meta data
             var oViewModel = new JSONModel({
                 busy : false,
                 delay : 0,
@@ -71,16 +66,9 @@ sap.ui.define([
             }
         },
 
-        /* =========================================================== */
-        /* begin: internal methods                                     */
-        /* =========================================================== */
 
-        /**
-         * Binds the view to the object path and expands the aggregated line items.
-         * @function
-         * @param {sap.ui.base.Event} oEvent pattern match event in route 'object'
-         * @private
-         */
+    
+
         _onObjectMatched: function (oEvent) {
             var sObjectId =  oEvent.getParameter("arguments").objectId;
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
@@ -96,13 +84,6 @@ sap.ui.define([
 
         },
 
-        /**
-         * Binds the view to the object path. Makes sure that detail view displays
-         * a busy indicator while data for the corresponding element binding is loaded.
-         * @function
-         * @param {string} sObjectPath path to the object to be bound to the view.
-         * @private
-         */
         _bindView: function (sObjectPath) {
             // Set busy indicator during view binding
             var oViewModel = this.getModel("detailView");

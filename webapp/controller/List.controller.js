@@ -83,24 +83,22 @@ sap.ui.define([
          * @public
          */
         onSearch: function (oEvent) {
-            if (oEvent.getParameters().refreshButtonPressed) {
-                // Search field's 'refresh' button has been pressed.
-                // This is visible if you select any list item.
-                // In this case no new search is triggered, we only
-                // refresh the list binding.
-                this.onRefresh();
-                return;
+            
+			
+			var sQuery = oEvent.getSource().getValue();
+			if (sQuery && sQuery.length > 0) {
+                var filterSupplier = new Filter("Supplier", FilterOperator.Contains, sQuery);
+				var filterPurchaseOrder = new Filter("PurchaseOrder", FilterOperator.Contains, sQuery);
+                var filterCreatedByUser = new Filter("CreatedByUser", FilterOperator.Contains, sQuery);
+                var aFilters = new Filter({filters:[filterSupplier,filterPurchaseOrder,filterCreatedByUser],and: false});
             }
-
-            var sQuery = oEvent.getParameter("query");
-
-            if (sQuery) {
-                this._oListFilterState.aSearch = [new Filter("PurchaseOrder", FilterOperator.Contains, sQuery)];
-            } else {
-                this._oListFilterState.aSearch = [];
-            }
-            this._applyFilterSearch();
-
+            
+            
+			// update list binding
+			var oList = this.byId("list");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(aFilters, "Application");
+            
         },
 
         /**
